@@ -2,13 +2,51 @@
 #include <string>
 #include <iostream>
 
+bool HandleKeyDown( HWND hWnd, WPARAM KeyCode )
+{
+	if( KeyCode == 'F' )
+	{
+		SetWindowText( hWnd, "FFFFFFFFFFFFFF" );
+	}
+
+	return true;
+}
+
+bool HandleKeyUp( HWND hWnd, WPARAM KeyCode )
+{
+	if( KeyCode == 'F' )
+	{
+		SetWindowText( hWnd, "No more FFFFFFFFFFFFFF" );
+	}
+
+	return true;
+}
+
+LRESULT CALLBACK DefaultWndProc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
+{
+	switch( msg )
+	{
+		case WM_CLOSE:
+			PostQuitMessage( 2137 );
+			break;
+		case WM_KEYDOWN:
+			HandleKeyDown( hWnd, wParam );
+			break;
+		case WM_KEYUP:
+			HandleKeyUp( hWnd, wParam );
+			break;
+	}
+
+	return DefWindowProc( hWnd, msg, wParam, lParam );
+}
+
 int CALLBACK WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow )
 {
 	char const* const ClassName = "DirectXWindow";
 	WNDCLASSEX WindowsClass = { 0 };
 	WindowsClass.cbSize = sizeof( WindowsClass );
 	WindowsClass.style = CS_OWNDC;
-	WindowsClass.lpfnWndProc = DefWindowProc;
+	WindowsClass.lpfnWndProc = DefaultWndProc;
 	WindowsClass.cbClsExtra = 0;
 	WindowsClass.cbWndExtra = 0;
 	WindowsClass.hInstance = hInstance;
@@ -25,9 +63,25 @@ int CALLBACK WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdL
 
 	ShowWindow( WindowHandle, SW_SHOW );
 
-	while( true )
+	// Message pump
+
+	MSG Msg;
+	BOOL gResult = -1;
+	// gResult == 0 is posted when QUIT msg is send
+	while( ( gResult = GetMessage( &Msg, nullptr, 0, 0 ) ) > 0 )
 	{
+		TranslateMessage( &Msg );
+		DispatchMessage( &Msg );
 	}
 
-	return 0;
+	if( gResult == -1 )
+	{
+		// Some Error
+		return -1;
+	}
+	else
+	{
+		// Returns code send in PostQuitMessage()
+		return Msg.wParam;
+	}
 }
