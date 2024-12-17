@@ -1,6 +1,7 @@
 #include <Windows.h>
-#include <string>
+//#include <string>
 #include <iostream>
+#include <sstream>
 
 bool HandleKeyDown( HWND hWnd, WPARAM KeyCode )
 {
@@ -22,6 +23,26 @@ bool HandleKeyUp( HWND hWnd, WPARAM KeyCode )
 	return true;
 }
 
+bool HandleCharInput( HWND hWnd, WPARAM KeyCode )
+{
+	static std::string Title;
+	Title.push_back( ( char ) KeyCode );
+	SetWindowText( hWnd, Title.c_str() );
+
+	return true;
+}
+
+bool HandleLMB( HWND hWnd, WPARAM wParam, LPARAM lParam )
+{
+	POINTS const pt = MAKEPOINTS( lParam );
+	std::ostringstream title;
+	title << "Click Click here: (" << pt.x << "," << pt.y << ")";
+
+	SetWindowText( hWnd, title.str().c_str() );
+
+	return true;
+}
+
 LRESULT CALLBACK DefaultWndProc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
 {
 	switch( msg )
@@ -34,6 +55,12 @@ LRESULT CALLBACK DefaultWndProc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lPar
 			break;
 		case WM_KEYUP:
 			HandleKeyUp( hWnd, wParam );
+			break;
+		case WM_CHAR:
+			HandleCharInput( hWnd, wParam );
+			break;
+		case WM_LBUTTONDOWN:
+			HandleLMB( hWnd, wParam, lParam );
 			break;
 	}
 
