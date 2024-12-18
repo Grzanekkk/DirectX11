@@ -1,6 +1,6 @@
 #pragma once
 
-#include "MXWindowSetup.h"
+#include "MXWindowsSetup.h"
 
 class MXWindow
 {

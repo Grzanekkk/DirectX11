@@ -148,7 +148,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="MXWindow.cpp" />
-    <ClCompile Include="MXWindowSetup.h" />
+    <ClCompile Include="MXWindowsSetup.h" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
