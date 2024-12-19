@@ -39,4 +39,4 @@
 #define NOTAPE
 #define NOSTRICT
 
-#include <Windows.h>
+#include <windows.h>

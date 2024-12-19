@@ -1,11 +1,115 @@
 #include "MXWindow.h"
 
+MXWindow::MXWindowClass MXWindow::MXWindowClass::WindowClass;
+
 MXWindow::MXWindow( int const Width, int const Height, char const* Name )
-{	
-	
+{
+	// calc window size
+	RECT rect;
+	rect.left = 100;
+	rect.right = Width + rect.left;
+	rect.top = 100;
+	rect.bottom = Height + rect.top;
+	AdjustWindowRect( &rect, WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU, FALSE );
+
+	hWnd = CreateWindow( MXWindowClass::GetName(), Name, WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU, CW_USEDEFAULT, CW_USEDEFAULT, rect.right - rect.left, rect.bottom - rect.top,
+		nullptr, nullptr, MXWindowClass::GetInstance(), this ); // Passing *this* as user param is SUPER important later
+
+	ShowWindow( hWnd, SW_SHOWDEFAULT );
 }
 
 MXWindow::~MXWindow()
 {
 	DestroyWindow( hWnd );
+}
+
+MXWindow::MXWindowClass::MXWindowClass()
+	: hInstance( GetModuleHandle( nullptr ) )
+{
+	char const* const ClassName = GetName();
+	WNDCLASSEX WindowsClass = { 0 };
+	WindowsClass.cbSize = sizeof( WindowsClass );
+	WindowsClass.style = CS_OWNDC;
+	WindowsClass.lpfnWndProc = HandleMsgSetup;
+	WindowsClass.cbClsExtra = 0;
+	WindowsClass.cbWndExtra = 0;
+	WindowsClass.hInstance = hInstance;
+	WindowsClass.hIcon = nullptr;
+	WindowsClass.hCursor = nullptr;
+	WindowsClass.hbrBackground = nullptr;
+	WindowsClass.lpszMenuName = nullptr;
+	WindowsClass.lpszClassName = ClassName;
+	WindowsClass.hIconSm = nullptr;
+
+	RegisterClassEx( &WindowsClass );
+}
+
+MXWindow::MXWindowClass::~MXWindowClass()
+{
+	UnregisterClass( WindowClassName, GetInstance() );
+}
+
+LRESULT MXWindow::HandleMsgSetup( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
+{
+	if( msg == WM_NCCREATE )
+	{
+		// extract ptr to created MXWindow
+		CREATESTRUCTW const* const CreateStruct = reinterpret_cast< CREATESTRUCTW* >( lParam );
+		if( CreateStruct )
+		{
+			MXWindow* const CreatedWindow = static_cast< MXWindow* >( CreateStruct->lpCreateParams );
+			if( CreatedWindow )
+			{
+				// retarget message handling
+				SetWindowLongPtr( hWnd, GWLP_USERDATA, reinterpret_cast< LONG_PTR >( CreatedWindow ) );
+				SetWindowLongPtr( hWnd, GWLP_WNDPROC, reinterpret_cast< LONG_PTR >( &MXWindow::HandleMsgThunk ) );
+
+				return CreatedWindow->HandleMsg( hWnd, msg, wParam, lParam );
+			}
+			else
+			{
+				// Print Error
+			}
+		}
+		else
+		{
+			// Print Error
+		}
+	}
+
+	return DefWindowProc( hWnd, msg, wParam, lParam );
+}
+
+LRESULT MXWindow::HandleMsgThunk( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
+{
+	MXWindow* const Window = reinterpret_cast< MXWindow* >( GetWindowLongPtr( hWnd, GWLP_USERDATA ) );
+	if( Window )
+	{
+		Window->HandleMsg( hWnd, msg, wParam, lParam );
+	}
+
+	// Print Error
+	return DefWindowProc( hWnd, msg, wParam, lParam );
+}
+
+LRESULT MXWindow::HandleMsg( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
+{
+	switch( msg )
+	{
+		case WM_CLOSE:
+			PostQuitMessage( 0 );
+			return 0;
+	}
+
+	return DefWindowProc( hWnd, msg, wParam, lParam );
+}
+
+char const* MXWindow::MXWindowClass::GetName()
+{
+	return WindowClassName;
+}
+
+HINSTANCE MXWindow::MXWindowClass::GetInstance()
+{
+	return WindowClass.hInstance;
 }
