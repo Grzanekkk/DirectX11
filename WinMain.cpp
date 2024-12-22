@@ -72,24 +72,39 @@ int CALLBACK WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdL
 {
 	MXWindow MXWindowHandle( 800, 300, "TOYOTA" );
 
-	// Message pump
-	MSG Msg;
-	BOOL gResult = -1;
-	// gResult == 0 is posted when QUIT msg is send
-	while( ( gResult = GetMessage( &Msg, nullptr, 0, 0 ) ) > 0 )
+	try
 	{
-		TranslateMessage( &Msg );
-		DispatchMessage( &Msg );
-	}
+		// Message pump
+		MSG Msg;
+		BOOL gResult = -1;
+		// gResult == 0 is posted when QUIT msg is send
+		while( ( gResult = GetMessage( &Msg, nullptr, 0, 0 ) ) > 0 )
+		{
+			TranslateMessage( &Msg );
+			DispatchMessage( &Msg );
+		}
 
-	if( gResult == -1 )
-	{
-		// Some Error
-		return -1;
+		if( gResult == -1 )
+		{
+			// Some Error
+			return -1;
+		}
+		else
+		{
+			// Returns code send in PostQuitMessage()
+			return Msg.wParam;
+		}
 	}
-	else
+	catch( MXException const& e )
 	{
-		// Returns code send in PostQuitMessage()
-		return Msg.wParam;
+		MessageBox( nullptr, e.what(), e.GetType(), MB_OK || MB_ICONEXCLAMATION );
+	}
+	catch( std::exception const& e )
+	{
+		MessageBox( nullptr, e.what(), "Standard Exception", MB_OK || MB_ICONEXCLAMATION );
+	}
+	catch( ... )
+	{
+		MessageBox( nullptr, "Unknown Exception", "Standard Exception", MB_OK || MB_ICONEXCLAMATION );
 	}
 }

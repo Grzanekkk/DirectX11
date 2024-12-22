@@ -1,6 +1,7 @@
 #pragma once
 
 #include "MXWindowsSetup.h"
+#include "MXException.h"
 
 class MXWindow
 {
@@ -20,6 +21,20 @@ private:
 		HINSTANCE hInstance;
 	};
 
+	class MXWindowException : public MXException
+	{
+	public:
+		MXWindowException( int const Line, char const* File, HRESULT const hr );
+		char const* what() const override;
+		virtual char const* GetType() const override;
+		HRESULT GetErrorCode() const;
+		std::string GetErrorString() const;
+		static std::string TranstaleErrorCode( HRESULT const hr );
+
+	protected:
+		HRESULT hr;
+	};
+
 public:
 	MXWindow( int const Width, int const Height, char const* Name );
 	~MXWindow();
@@ -36,3 +51,5 @@ protected:
 	int Height = 0;
 	HWND hWnd;
 };
+
+#define MXWND_EXCEPTION( hr ) MXWindow::MXWindowException( __LINE__, __FILE__, hr )

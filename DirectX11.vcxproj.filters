@@ -24,9 +24,15 @@
     <ClCompile Include="MXWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MXException.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MXWindow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MXException.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
