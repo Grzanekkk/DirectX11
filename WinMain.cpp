@@ -70,10 +70,10 @@ LRESULT CALLBACK DefaultWndProc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lPar
 
 int CALLBACK WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow )
 {
-	MXWindow MXWindowHandle( 800, 300, "TOYOTA" );
-
 	try
 	{
+		MXWindow MXWindowHandle( 800, 300, "TOYOTA" );
+
 		// Message pump
 		MSG Msg;
 		BOOL gResult = -1;

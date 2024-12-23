@@ -14,8 +14,8 @@ MXWindow::MXWindow( int const Width, int const Height, char const* Name )
 	rect.bottom = Height + rect.top;
 	AdjustWindowRect( &rect, WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU, FALSE );
 
-	hWnd = CreateWindow( MXWindowClass::GetName(), Name, WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU, CW_USEDEFAULT, CW_USEDEFAULT, rect.right - rect.left, rect.bottom - rect.top,
-		nullptr, nullptr, MXWindowClass::GetInstance(), this ); // Passing *this* as user param is SUPER important later
+	hWnd = CreateWindow( MXWindow::MXWindowClass::GetName(), Name, WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU, CW_USEDEFAULT, CW_USEDEFAULT, rect.right - rect.left,
+		rect.bottom - rect.top, nullptr, nullptr, MXWindowClass::GetInstance(), this ); // Passing *this* as user param is SUPER important later
 
 	if( hWnd == nullptr )
 	{
@@ -41,12 +41,12 @@ MXWindow::MXWindowClass::MXWindowClass()
 	WindowsClass.cbClsExtra = 0;
 	WindowsClass.cbWndExtra = 0;
 	WindowsClass.hInstance = hInstance;
-	WindowsClass.hIcon =  static_cast< HICON >( LoadImage( hInstance, MAKEINTRESOURCE( IDI_ICON1 ), IMAGE_ICON, 32, 32, 0 ) );
+	WindowsClass.hIcon = static_cast< HICON >( LoadImage( hInstance, MAKEINTRESOURCE( IDI_ICON1 ), IMAGE_ICON, 32, 32, 0 ) );
 	WindowsClass.hCursor = nullptr;
 	WindowsClass.hbrBackground = nullptr;
 	WindowsClass.lpszMenuName = nullptr;
 	WindowsClass.lpszClassName = ClassName;
-	WindowsClass.hIconSm =  static_cast< HICON >( LoadImage( hInstance, MAKEINTRESOURCE( IDI_ICON1 ), IMAGE_ICON, 16, 16, 0 ) );
+	WindowsClass.hIconSm = static_cast< HICON >( LoadImage( hInstance, MAKEINTRESOURCE( IDI_ICON1 ), IMAGE_ICON, 16, 16, 0 ) );
 
 	RegisterClassEx( &WindowsClass );
 }
@@ -130,7 +130,7 @@ MXWindow::MXWindowException::MXWindowException( int const Line, char const* File
 char const* MXWindow::MXWindowException::what() const
 {
 	std::ostringstream ErrorString;
-	ErrorString << GetType() << std::endl << "[ErrorCode] " << GetErrorCode() << std::endl << "[Description] " << std::endl << GetOriginString();
+	ErrorString << GetType() << std::endl << "[ErrorCode] " << GetErrorCode() << std::endl << "[Description] " << GetErrorMessage() << std::endl << GetOriginString();
 	WhatBuffer = ErrorString.str();
 	return WhatBuffer.c_str();
 }
@@ -145,7 +145,7 @@ HRESULT MXWindow::MXWindowException::GetErrorCode() const
 	return hr;
 }
 
-std::string MXWindow::MXWindowException::GetErrorString() const
+std::string MXWindow::MXWindowException::GetErrorMessage() const
 {
 	return TranstaleErrorCode( hr );
 }
@@ -153,7 +153,7 @@ std::string MXWindow::MXWindowException::GetErrorString() const
 std::string MXWindow::MXWindowException::TranstaleErrorCode( HRESULT const hr )
 {
 	char* MessageBuffer = nullptr;
-	DWORD const Messagelen = FormatMessage( FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_STRING || FORMAT_MESSAGE_IGNORE_INSERTS, nullptr, hr,
+	DWORD Messagelen = FormatMessage( FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS, nullptr, hr,
 		MAKELANGID( LANG_NEUTRAL, SUBLANG_DEFAULT ), reinterpret_cast< LPSTR >( &MessageBuffer ), 0, nullptr );
 
 	if( Messagelen == 0 )
