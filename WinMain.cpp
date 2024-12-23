@@ -92,7 +92,7 @@ int CALLBACK WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdL
 		else
 		{
 			// Returns code send in PostQuitMessage()
-			return Msg.wParam;
+			return ( int ) Msg.wParam;
 		}
 	}
 	catch( MXException const& e )

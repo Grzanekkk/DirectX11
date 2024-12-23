@@ -1,5 +1,6 @@
 #include "MXWindow.h"
 #include <sstream>
+#include "resource.h"
 
 MXWindow::MXWindowClass MXWindow::MXWindowClass::WindowClass;
 
@@ -15,6 +16,11 @@ MXWindow::MXWindow( int const Width, int const Height, char const* Name )
 
 	hWnd = CreateWindow( MXWindowClass::GetName(), Name, WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU, CW_USEDEFAULT, CW_USEDEFAULT, rect.right - rect.left, rect.bottom - rect.top,
 		nullptr, nullptr, MXWindowClass::GetInstance(), this ); // Passing *this* as user param is SUPER important later
+
+	if( hWnd == nullptr )
+	{
+		throw MXWND_LAST_EXCEPTION();
+	}
 
 	ShowWindow( hWnd, SW_SHOWDEFAULT );
 }
@@ -35,12 +41,12 @@ MXWindow::MXWindowClass::MXWindowClass()
 	WindowsClass.cbClsExtra = 0;
 	WindowsClass.cbWndExtra = 0;
 	WindowsClass.hInstance = hInstance;
-	WindowsClass.hIcon = nullptr;
+	WindowsClass.hIcon =  static_cast< HICON >( LoadImage( hInstance, MAKEINTRESOURCE( IDI_ICON1 ), IMAGE_ICON, 32, 32, 0 ) );
 	WindowsClass.hCursor = nullptr;
 	WindowsClass.hbrBackground = nullptr;
 	WindowsClass.lpszMenuName = nullptr;
 	WindowsClass.lpszClassName = ClassName;
-	WindowsClass.hIconSm = nullptr;
+	WindowsClass.hIconSm =  static_cast< HICON >( LoadImage( hInstance, MAKEINTRESOURCE( IDI_ICON1 ), IMAGE_ICON, 16, 16, 0 ) );
 
 	RegisterClassEx( &WindowsClass );
 }

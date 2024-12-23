@@ -53,3 +53,4 @@ protected:
 };
 
 #define MXWND_EXCEPTION( hr ) MXWindow::MXWindowException( __LINE__, __FILE__, hr )
+#define MXWND_LAST_EXCEPTION() MXWindow::MXWindowException( __LINE__, __FILE__, GetLastError() )
