@@ -32,6 +32,11 @@ MXWindow::~MXWindow()
 	DestroyWindow( hWnd );
 }
 
+MXKeyboardHandle& MXWindow::GetKeyboardHandle()
+{
+	return KeyboardHandle;
+}
+
 MXWindow::MXWindowClass::MXWindowClass()
 	: hInstance( GetModuleHandle( nullptr ) )
 {

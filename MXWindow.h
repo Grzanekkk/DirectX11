@@ -43,6 +43,8 @@ public:
 	~MXWindow();
 	MXWindow( MXWindow const& ) = delete; // no need for copy constructor
 
+	MXKeyboardHandle& GetKeyboardHandle();
+
 private:
 	// Allows to use member function to handle messages
 	static LRESULT CALLBACK HandleMsgSetup( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam );

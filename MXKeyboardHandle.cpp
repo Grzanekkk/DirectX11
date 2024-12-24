@@ -37,7 +37,7 @@ MXKeyboardHandle::MXKeyboardHandle()
 {
 }
 
-bool MXKeyboardHandle::KeyIsPressed( unsigned char const KeyCode ) const
+bool MXKeyboardHandle::IsKeyPressed( unsigned char const KeyCode ) const
 {
 	return KeyStates[ KeyCode ];
 }

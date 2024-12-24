@@ -34,7 +34,7 @@ class MXKeyboardHandle
 public:
 	MXKeyboardHandle();
 
-	bool KeyIsPressed( unsigned char const KeyCode ) const;
+	bool IsKeyPressed( unsigned char const KeyCode ) const;
 	std::optional< MXKeyboardHandleEvent > ReadKey();
 	bool IsKeyEmpty() const;
 	void ClearKey();
