@@ -19,7 +19,7 @@ int CALLBACK WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdL
 			TranslateMessage( &Msg );
 			DispatchMessage( &Msg );
 
-			if( MXWindowHandle.GetKeyboardHandle().IsKeyPressed( VK_SPACE ) )
+			if( MXWindowHandle.GetKeyboardHandle().IsKeyPressed( VK_MENU ) )
 			{
 				MessageBox( nullptr, "SPACE SPACE", "SPACE", MB_OK || MB_ICONHAND );
 			}

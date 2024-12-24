@@ -117,9 +117,16 @@ LRESULT MXWindow::HandleMsg( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
 			KeyboardHandle.ClearState();
 			break;
 		case WM_KEYDOWN:
-			KeyboardHandle.OnKeyPressed( static_cast< unsigned char >( wParam ) );
+		// handle ALT and F-keys
+		case WM_SYSKEYDOWN:
+			// lParam & 0x40000000 checks bit 30
+			if( !( lParam & 0x40000000 || KeyboardHandle.IsAutorepeatEnaled() ) )
+			{
+				KeyboardHandle.OnKeyPressed( static_cast< unsigned char >( wParam ) );
+			}
 			break;
 		case WM_KEYUP:
+		case WM_SYSKEYUP:
 			KeyboardHandle.OnKeyReleased( static_cast< unsigned char >( wParam ) );
 			break;
 		case WM_CHAR:

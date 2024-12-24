@@ -116,7 +116,7 @@ void MXKeyboardHandle::OnKeyPressed( unsigned char const KeyCode )
 
 void MXKeyboardHandle::OnKeyReleased( unsigned char const KeyCode )
 {
-	KeyStates[ KeyCode ] = true;
+	KeyStates[ KeyCode ] = false;
 	KeyBuffer.push( MXKeyboardHandleEvent( MXKeyboardHandleEvent::MXKeyboardHandleEventType::Press, KeyCode ) );
 	TrimBuffer( KeyBuffer );
 }
