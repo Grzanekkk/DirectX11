@@ -1,3 +1,5 @@
+// Copyright (c) 2024, Made by Jan Puto :>
+
 #pragma once
 
 #define _WIN32_WINNT 0x0601

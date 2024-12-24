@@ -148,12 +148,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="MXException.cpp" />
+    <ClCompile Include="MXKeyboardHandle.cpp" />
     <ClCompile Include="MXWindow.cpp" />
     <ClCompile Include="MXWindowsSetup.h" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MXException.h" />
+    <ClInclude Include="MXKeyboardHandle.h" />
     <ClInclude Include="MXWindow.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
