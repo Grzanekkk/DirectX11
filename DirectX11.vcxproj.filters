@@ -51,7 +51,7 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\Downloads\CoolIcon.ico">
+    <Image Include="CoolIcon.ico">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
