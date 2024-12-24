@@ -4,6 +4,7 @@
 
 #include "MXWindowsSetup.h"
 #include "MXException.h"
+#include "MXKeyboardHandle.h"
 
 class MXWindow
 {
@@ -52,6 +53,7 @@ protected:
 	int Width = 0;
 	int Height = 0;
 	HWND hWnd;
+	MXKeyboardHandle KeyboardHandle;
 };
 
 #define MXWND_EXCEPTION( hr ) MXWindow::MXWindowException( __LINE__, __FILE__, hr )

@@ -43,12 +43,12 @@ MXWindow::MXWindowClass::MXWindowClass()
 	WindowsClass.cbClsExtra = 0;
 	WindowsClass.cbWndExtra = 0;
 	WindowsClass.hInstance = hInstance;
-	WindowsClass.hIcon = static_cast< HICON >( LoadImage( hInstance, MAKEINTRESOURCE( IDI_ICON1 ), IMAGE_ICON, 32, 32, 0 ) );
+	WindowsClass.hIcon = static_cast< HICON >( LoadImage( hInstance, MAKEINTRESOURCE( IDI_ICON2 ), IMAGE_ICON, 32, 32, 0 ) );
 	WindowsClass.hCursor = nullptr;
 	WindowsClass.hbrBackground = nullptr;
 	WindowsClass.lpszMenuName = nullptr;
 	WindowsClass.lpszClassName = ClassName;
-	WindowsClass.hIconSm = static_cast< HICON >( LoadImage( hInstance, MAKEINTRESOURCE( IDI_ICON1 ), IMAGE_ICON, 16, 16, 0 ) );
+	WindowsClass.hIconSm = static_cast< HICON >( LoadImage( hInstance, MAKEINTRESOURCE( IDI_ICON2 ), IMAGE_ICON, 16, 16, 0 ) );
 
 	RegisterClassEx( &WindowsClass );
 }
@@ -108,6 +108,18 @@ LRESULT MXWindow::HandleMsg( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
 		case WM_CLOSE:
 			PostQuitMessage( 0 );
 			return 0;
+		case WM_KILLFOCUS:
+			KeyboardHandle.ClearState();
+			break;
+		case WM_KEYDOWN:
+			KeyboardHandle.OnKeyPressed( static_cast< unsigned char >( wParam ) );
+			break;
+		case WM_KEYUP:
+			KeyboardHandle.OnKeyReleased( static_cast< unsigned char >( wParam ) );
+			break;
+		case WM_CHAR:
+			KeyboardHandle.OnChar( static_cast< unsigned char >( wParam ) );
+			break;
 	}
 
 	return DefWindowProc( hWnd, msg, wParam, lParam );
