@@ -8,7 +8,7 @@ int CALLBACK WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdL
 {
 	try
 	{
-		MXWindow MXWindowHandle( 800, 300, "TOYOTA" );
+		MXWindow MXWindowHandle( 800, 600, "TOYOTA" );
 
 		// Message pump
 		MSG Msg;
