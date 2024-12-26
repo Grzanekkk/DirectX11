@@ -5,6 +5,7 @@
 #include "MXWindowsSetup.h"
 #include "MXException.h"
 #include "MXKeyboardHandle.h"
+#include "MXMouseHandle.h"
 
 class MXWindow
 {
@@ -44,6 +45,8 @@ public:
 	MXWindow( MXWindow const& ) = delete; // no need for copy constructor
 
 	MXKeyboardHandle& GetKeyboardHandle();
+	MXMouseHandle& GetMouseHandle();
+	void SetTitle( std::string const& NewTitle );
 
 private:
 	// Allows to use member function to handle messages
@@ -56,6 +59,7 @@ protected:
 	int Height = 0;
 	HWND hWnd;
 	MXKeyboardHandle KeyboardHandle;
+	MXMouseHandle MouseHandle;
 };
 
 #define MXWND_EXCEPTION( hr ) MXWindow::MXWindowException( __LINE__, __FILE__, hr )

@@ -3,10 +3,14 @@
 #include "MXWindow.h"
 #include <sstream>
 #include "resource.h"
+#include "Windowsx.h"
 
 MXWindow::MXWindowClass MXWindow::MXWindowClass::WindowClass;
 
 MXWindow::MXWindow( int const Width, int const Height, char const* Name )
+	: Width{ Width }
+	, Height{ Height }
+
 {
 	// calc window size
 	RECT rect;
@@ -35,6 +39,19 @@ MXWindow::~MXWindow()
 MXKeyboardHandle& MXWindow::GetKeyboardHandle()
 {
 	return KeyboardHandle;
+}
+
+MXMouseHandle& MXWindow::GetMouseHandle()
+{
+	return MouseHandle;
+}
+
+void MXWindow::SetTitle( std::string const& NewTitle )
+{
+	if( SetWindowText( hWnd, NewTitle.c_str() ) == 0 )
+	{
+		throw MXWND_LAST_EXCEPTION();
+	}
 }
 
 MXWindow::MXWindowClass::MXWindowClass()
@@ -116,6 +133,7 @@ LRESULT MXWindow::HandleMsg( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
 		case WM_KILLFOCUS:
 			KeyboardHandle.ClearState();
 			break;
+		/// *** Keybaord handle *** ///
 		case WM_KEYDOWN:
 		// handle ALT and F-keys
 		case WM_SYSKEYDOWN:
@@ -132,6 +150,35 @@ LRESULT MXWindow::HandleMsg( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
 		case WM_CHAR:
 			KeyboardHandle.OnChar( static_cast< unsigned char >( wParam ) );
 			break;
+		/// *** Mouse handle *** ///
+		case WM_LBUTTONDOWN:
+			MouseHandle.OnLMBPressed( GET_X_LPARAM( lParam ), GET_Y_LPARAM( lParam ) );
+			break;
+		case WM_LBUTTONUP:
+			MouseHandle.OnLMBReleased( GET_X_LPARAM( lParam ), GET_Y_LPARAM( lParam ) );
+			break;
+		case WM_RBUTTONDOWN:
+			MouseHandle.OnRMBPressed( GET_X_LPARAM( lParam ), GET_Y_LPARAM( lParam ) );
+			break;
+		case WM_RBUTTONUP:
+			MouseHandle.OnRMBReleased( GET_X_LPARAM( lParam ), GET_Y_LPARAM( lParam ) );
+			break;
+		case WM_MOUSEWHEEL: {
+			int const zDelta = GET_WHEEL_DELTA_WPARAM( wParam );
+			if( zDelta > 0 )
+			{
+				MouseHandle.OnWheelUp( GET_X_LPARAM( lParam ), GET_Y_LPARAM( lParam ) );
+			}
+			else if( zDelta < 0 )
+			{
+				MouseHandle.OnWheelDown( GET_X_LPARAM( lParam ), GET_Y_LPARAM( lParam ) );
+			}
+			break;
+		}
+		case WM_MOUSEMOVE:
+			MouseHandle.OnMouseMove( GET_X_LPARAM( lParam ), GET_Y_LPARAM( lParam ) );
+			break;
+			// case WM_MOUSELEAVE
 	}
 
 	return DefWindowProc( hWnd, msg, wParam, lParam );

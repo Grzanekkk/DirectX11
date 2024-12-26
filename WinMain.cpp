@@ -8,7 +8,7 @@ int CALLBACK WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdL
 {
 	try
 	{
-		MXWindow MXWindowHandle( 800, 600, "TOYOTA" );
+		MXWindow WindowHandle( 800, 600, "TOYOTA" );
 
 		// Message pump
 		MSG Msg;
@@ -19,9 +19,24 @@ int CALLBACK WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdL
 			TranslateMessage( &Msg );
 			DispatchMessage( &Msg );
 
-			if( MXWindowHandle.GetKeyboardHandle().IsKeyPressed( VK_MENU ) )
+			if( WindowHandle.GetKeyboardHandle().IsKeyPressed( VK_MENU ) )
 			{
 				MessageBox( nullptr, "SPACE SPACE", "SPACE", MB_OK || MB_ICONHAND );
+			}
+
+			MXMouseHandle& MouseHandle = WindowHandle.GetMouseHandle();
+			if( !MouseHandle.IsEmpty() )
+			{
+				MXMouseHandleEvent const& Event = MouseHandle.Read().value();
+				if( Event.IsValid() )
+				{
+					if( Event.GetEventType() == MXMouseHandleEvent::EMXMouseHandleEventType::Move )
+					{
+						std::ostringstream oss;
+						oss << "Mouse Position: (" << Event.GetPosX() << ", " << Event.GetPosY() << ")";
+						WindowHandle.SetTitle( oss.str() );
+					}
+				}
 			}
 		}
 
