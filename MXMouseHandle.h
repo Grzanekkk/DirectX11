@@ -69,8 +69,8 @@ public:
 	void OnRMBReleased( int const PosX, int const PosY );
 	void OnWheelUp( int const PosX, int const PosY );
 	void OnWheelDown( int const PosX, int const PosY );
-	void OnMouseEnterWindow( int const PosX, int const PosY );
-	void OnMouseLeaveWindow( int const PosX, int const PosY );
+	void OnMouseEnterWindow();
+	void OnMouseLeaveWindow();
 
 	void TrimBuffer();
 

@@ -176,7 +176,7 @@ void MXMouseHandle::OnWheelDown( int const PosX, int const PosY )
 	TrimBuffer();
 }
 
-void MXMouseHandle::OnMouseEnterWindow( int const PosX, int const PosY )
+void MXMouseHandle::OnMouseEnterWindow()
 {
 	MouseInWindow = true;
 
@@ -184,7 +184,7 @@ void MXMouseHandle::OnMouseEnterWindow( int const PosX, int const PosY )
 	TrimBuffer();
 }
 
-void MXMouseHandle::OnMouseLeaveWindow( int const PosX, int const PosY )
+void MXMouseHandle::OnMouseLeaveWindow()
 {
 	MouseInWindow = false;
 

@@ -175,9 +175,34 @@ LRESULT MXWindow::HandleMsg( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
 			}
 			break;
 		}
-		case WM_MOUSEMOVE:
-			MouseHandle.OnMouseMove( GET_X_LPARAM( lParam ), GET_Y_LPARAM( lParam ) );
+		case WM_MOUSEMOVE: {
+			POINTS const pt MAKEPOINTS( lParam );
+			// Handle mouse movement inside client region
+			if( pt.x >= 0 && pt.x < Width && pt.y >= 0 && pt.y < Height )
+			{
+				MouseHandle.OnMouseMove( GET_X_LPARAM( lParam ), GET_Y_LPARAM( lParam ) );
+				if( !MouseHandle.IsMouseInWindow() )
+				{
+					SetCapture( hWnd );
+					MouseHandle.OnMouseEnterWindow();
+				}
+			}
+			// Handle mouse movement outside client region
+			else
+			{
+				if( MouseHandle.IsLMBPressed() || MouseHandle.IsRMBPressed() )
+				{
+					MouseHandle.OnMouseMove( GET_X_LPARAM( lParam ), GET_Y_LPARAM( lParam ) );
+				}
+				else
+				{
+					ReleaseCapture();
+					MouseHandle.OnMouseLeaveWindow();
+				}
+			}
+
 			break;
+		}
 			// case WM_MOUSELEAVE
 	}
 
