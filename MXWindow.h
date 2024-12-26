@@ -6,6 +6,7 @@
 #include "MXException.h"
 #include "MXKeyboardHandle.h"
 #include "MXMouseHandle.h"
+#include <optional>
 
 class MXWindow
 {
@@ -47,6 +48,7 @@ public:
 	MXKeyboardHandle& GetKeyboardHandle();
 	MXMouseHandle& GetMouseHandle();
 	void SetTitle( std::string const& NewTitle );
+	std::optional< int > ProcessMessages();
 
 private:
 	// Allows to use member function to handle messages

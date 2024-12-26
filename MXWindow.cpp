@@ -54,6 +54,23 @@ void MXWindow::SetTitle( std::string const& NewTitle )
 	}
 }
 
+std::optional< int > MXWindow::ProcessMessages()
+{
+	MSG Msg;
+	while( PeekMessage( &Msg, nullptr, 0, 0, PM_REMOVE ) )
+	{
+		if( Msg.message == WM_QUIT )
+		{
+			return Msg.wParam;
+		}
+
+		TranslateMessage( &Msg );
+		DispatchMessage( &Msg );
+	}
+
+	return {};
+}
+
 MXWindow::MXWindowClass::MXWindowClass()
 	: hInstance( GetModuleHandle( nullptr ) )
 {
