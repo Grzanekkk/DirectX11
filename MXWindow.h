@@ -7,6 +7,9 @@
 #include "MXKeyboardHandle.h"
 #include "MXMouseHandle.h"
 #include <optional>
+#include <memory>
+
+class MXGraphics;
 
 class MXWindow
 {
@@ -49,6 +52,7 @@ public:
 	MXMouseHandle& GetMouseHandle();
 	void SetTitle( std::string const& NewTitle );
 	std::optional< int > ProcessMessages();
+	MXGraphics& GetGraphics();
 
 private:
 	// Allows to use member function to handle messages
@@ -62,6 +66,7 @@ protected:
 	HWND hWnd;
 	MXKeyboardHandle KeyboardHandle;
 	MXMouseHandle MouseHandle;
+	std::unique_ptr< MXGraphics > Graphics = nullptr;
 };
 
 #define MXWND_EXCEPTION( hr ) MXWindow::MXWindowException( __LINE__, __FILE__, hr )

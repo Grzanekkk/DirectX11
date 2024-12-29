@@ -4,6 +4,7 @@
 #include <sstream>
 #include "resource.h"
 #include "Windowsx.h"
+#include "MXGraphics.h"
 
 MXWindow::MXWindowClass MXWindow::MXWindowClass::WindowClass;
 
@@ -29,6 +30,9 @@ MXWindow::MXWindow( int const Width, int const Height, char const* Name )
 	}
 
 	ShowWindow( hWnd, SW_SHOWDEFAULT );
+
+	// Makes Graphics handle object for handling all graphics stuff (D11)
+	Graphics = std::make_unique< MXGraphics >( hWnd );
 }
 
 MXWindow::~MXWindow()
@@ -69,6 +73,17 @@ std::optional< int > MXWindow::ProcessMessages()
 	}
 
 	return {};
+}
+
+MXGraphics& MXWindow::GetGraphics()
+{
+	MXGraphics* const GraphicsPtr = Graphics.get();
+	if( Graphics == nullptr )
+	{
+		throw MX_EXCEPTION( "Graphics [MXGraphics] is not valid" );
+	}
+
+	return *Graphics;
 }
 
 MXWindow::MXWindowClass::MXWindowClass()
