@@ -5,6 +5,7 @@
 #include "resource.h"
 #include "Windowsx.h"
 #include "MXGraphics.h"
+#include "MXWindowException.h"
 
 MXWindow::MXWindowClass MXWindow::MXWindowClass::WindowClass;
 
@@ -249,50 +250,4 @@ char const* MXWindow::MXWindowClass::GetName()
 HINSTANCE MXWindow::MXWindowClass::GetInstance()
 {
 	return WindowClass.hInstance;
-}
-
-MXWindow::MXWindowException::MXWindowException( int const Line, char const* File, HRESULT const hr )
-	: MXException{ Line, File }
-	, hr{ hr }
-{
-}
-
-char const* MXWindow::MXWindowException::what() const
-{
-	std::ostringstream ErrorString;
-	ErrorString << GetType() << std::endl << "[ErrorCode] " << GetErrorCode() << std::endl << "[Description] " << GetErrorMessage() << std::endl << GetOriginString();
-	WhatBuffer = ErrorString.str();
-	return WhatBuffer.c_str();
-}
-
-char const* MXWindow::MXWindowException::GetType() const
-{
-	return "MX Window Exception";
-}
-
-HRESULT MXWindow::MXWindowException::GetErrorCode() const
-{
-	return hr;
-}
-
-std::string MXWindow::MXWindowException::GetErrorMessage() const
-{
-	return TranstaleErrorCode( hr );
-}
-
-std::string MXWindow::MXWindowException::TranstaleErrorCode( HRESULT const hr )
-{
-	char* MessageBuffer = nullptr;
-	DWORD Messagelen = FormatMessage( FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS, nullptr, hr,
-		MAKELANGID( LANG_NEUTRAL, SUBLANG_DEFAULT ), reinterpret_cast< LPSTR >( &MessageBuffer ), 0, nullptr );
-
-	if( Messagelen == 0 )
-	{
-		return "Unknown error code";
-	}
-
-	std::string const ErrorString = MessageBuffer;
-	LocalFree( MessageBuffer );
-
-	return ErrorString;
 }

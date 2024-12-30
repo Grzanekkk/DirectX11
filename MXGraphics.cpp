@@ -2,6 +2,7 @@
 
 #include "MXGraphics.h"
 #include "MXException.h"
+#include "MXWindowException.h"
 
 #pragma comment( lib, "d3d11.lib" )
 
@@ -24,8 +25,13 @@ MXGraphics::MXGraphics( HWND hWnd )
 	SwapChainDescriptor.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
 	SwapChainDescriptor.Flags = 0;
 
-	D3D11CreateDeviceAndSwapChain(
-		nullptr, D3D_DRIVER_TYPE_HARDWARE, nullptr, 0, nullptr, 0, D3D11_SDK_VERSION, &SwapChainDescriptor, &SwapChain, &Device, nullptr, &DeviceContext );
+	HRESULT hr = D3D11CreateDeviceAndSwapChain(
+		nullptr, D3D_DRIVER_TYPE_HARDWARE, nullptr, D3D11_CREATE_DEVICE_DEBUG, nullptr, 0, D3D11_SDK_VERSION, &SwapChainDescriptor, &SwapChain, &Device, nullptr, &DeviceContext );
+
+	if( FAILED( hr ) )
+	{
+		throw MXWND_EXCEPTION( hr );
+	}
 
 	if( DeviceContext == nullptr )
 	{

@@ -39,6 +39,9 @@
     <ClCompile Include="MXGraphics.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MXWindowException.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MXWindow.h">
@@ -60,6 +63,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MXGraphics.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MXWindowException.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
