@@ -6,6 +6,8 @@
 
 #pragma comment( lib, "d3d11.lib" )
 
+namespace wrl = Microsoft::WRL;
+
 MXGraphics::MXGraphics( HWND hWnd )
 {
 	DXGI_SWAP_CHAIN_DESC SwapChainDescriptor = {};
@@ -48,35 +50,12 @@ MXGraphics::MXGraphics( HWND hWnd )
 		throw MX_EXCEPTION( "Failed to create Device" );
 	}
 
-	ID3D11Resource* BackBuffer = nullptr;
-	SwapChain->GetBuffer( 0, __uuidof( ID3D11Resource ), reinterpret_cast< void** >( &BackBuffer ) );
+	wrl::ComPtr< ID3D11Resource > BackBuffer = nullptr;
+	SwapChain->GetBuffer( 0, __uuidof( ID3D11Resource ), &BackBuffer );
 	if( BackBuffer )
 	{
-		Device->CreateRenderTargetView( BackBuffer, nullptr, &RenderTargetView );
+		Device->CreateRenderTargetView( BackBuffer.Get(), nullptr, &RenderTargetView );
 		BackBuffer->Release();
-	}
-}
-
-MXGraphics::~MXGraphics()
-{
-	if( RenderTargetView != nullptr )
-	{
-		RenderTargetView->Release();
-	}
-
-	if( DeviceContext != nullptr )
-	{
-		DeviceContext->Release();
-	}
-
-	if( SwapChain != nullptr )
-	{
-		SwapChain->Release();
-	}
-
-	if( Device != nullptr )
-	{
-		Device->Release();
 	}
 }
 
@@ -90,6 +69,6 @@ void MXGraphics::ClearBuffer( float const R, float const G, float const B )
 	float const color[] = { R, G, B, 1.f };
 	if( DeviceContext )
 	{
-		DeviceContext->ClearRenderTargetView( RenderTargetView, color );
+		DeviceContext->ClearRenderTargetView( RenderTargetView.Get(), color );
 	}
 }
