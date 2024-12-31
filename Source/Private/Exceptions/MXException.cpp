@@ -1,6 +1,6 @@
 // Copyright (c) 2024, Made by Jan Puto :>
 
-#include "MXException.h"
+#include "Exceptions/MXException.h"
 #include <sstream>
 
 MXException::MXException( int const Line, char const* File, char const* const Message )

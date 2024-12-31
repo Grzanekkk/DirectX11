@@ -1,5 +1,5 @@
 // Copyright (c) 2024, Made by Jan Puto :>
-#include "MXMouseHandle.h"
+#include "Input/MXMouseHandle.h"
 
 MXMouseHandleEvent::MXMouseHandleEvent()
 	: EventType{ EMXMouseHandleEventType::Invalid }

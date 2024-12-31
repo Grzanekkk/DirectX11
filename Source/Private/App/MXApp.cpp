@@ -1,8 +1,8 @@
 // Copyright (c) 2024, Made by Jan Puto :>
 
-#include "MXApp.h"
-#include "MXWindow.h"
-#include "MXGraphics.h"
+#include "App/MXApp.h"
+#include "Windows/MXWindow.h"
+#include "Graphics/MXGraphics.h"
 #include <random>
 
 MXApp::MXApp()

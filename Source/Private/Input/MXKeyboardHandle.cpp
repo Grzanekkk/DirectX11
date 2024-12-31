@@ -1,5 +1,5 @@
-#include "MXKeyboardHandle.h"
 // Copyright (c) 2024, Made by Jan Puto :>
+#include "Input/MXKeyboardHandle.h"
 
 MXKeyboardHandleEvent::MXKeyboardHandleEvent()
 	: EventType{ MXKeyboardHandleEventType::Invalid }

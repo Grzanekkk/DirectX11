@@ -15,57 +15,57 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="WinMain.cpp">
+    <ClCompile Include="Source\Private\App\MXApp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MXWindowsSetup.h">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MXWindow.cpp">
+    <ClCompile Include="Source\Private\Exceptions\MXException.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MXException.cpp">
+    <ClCompile Include="Source\Private\Exceptions\MXWindowException.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MXKeyboardHandle.cpp">
+    <ClCompile Include="Source\Private\Input\MXKeyboardHandle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MXMouseHandle.cpp">
+    <ClCompile Include="Source\Private\Input\MXMouseHandle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MXApp.cpp">
+    <ClCompile Include="Source\Private\Graphics\MXGraphics.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MXGraphics.cpp">
+    <ClCompile Include="Source\Private\Windows\MXWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MXWindowException.cpp">
+    <ClCompile Include="Source\Private\Windows\WinMain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MXWindow.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MXException.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MXKeyboardHandle.h">
+    <ClInclude Include="Source\Public\App\MXApp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MXMouseHandle.h">
+    <ClInclude Include="Source\Public\Exceptions\MXException.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MXApp.h">
+    <ClInclude Include="Source\Public\Exceptions\MXWindowException.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MXGraphics.h">
+    <ClInclude Include="Source\Public\Graphics\MXGraphics.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MXWindowException.h">
+    <ClInclude Include="Source\Public\Input\MXKeyboardHandle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Public\Input\MXMouseHandle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Public\Windows\MXWindow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Public\Windows\MXWindowsSetup.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

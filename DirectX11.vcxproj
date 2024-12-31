@@ -70,6 +70,18 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>$(ProjectDir)Source\Public;$(ProjectDir)Source\Public\Windows;$(ProjectDir);$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>$(ProjectDir)Source\Public;$(ProjectDir)Source\Public\Windows;$(ProjectDir);$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(ProjectDir)Source\Public;$(ProjectDir)Source\Public\Windows;$(ProjectDir);$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(ProjectDir)Source\Public;$(ProjectDir)Source\Public\Windows;$(ProjectDir);$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -151,25 +163,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="MXApp.cpp" />
-    <ClCompile Include="MXException.cpp" />
-    <ClCompile Include="MXGraphics.cpp" />
-    <ClCompile Include="MXKeyboardHandle.cpp" />
-    <ClCompile Include="MXMouseHandle.cpp" />
-    <ClCompile Include="MXWindow.cpp" />
-    <ClCompile Include="MXWindowException.cpp" />
-    <ClCompile Include="MXWindowsSetup.h" />
-    <ClCompile Include="WinMain.cpp" />
+    <ClCompile Include="Source\Private\App\MXApp.cpp" />
+    <ClCompile Include="Source\Private\Exceptions\MXException.cpp" />
+    <ClCompile Include="Source\Private\Exceptions\MXWindowException.cpp" />
+    <ClCompile Include="Source\Private\Graphics\MXGraphics.cpp" />
+    <ClCompile Include="Source\Private\Input\MXKeyboardHandle.cpp" />
+    <ClCompile Include="Source\Private\Input\MXMouseHandle.cpp" />
+    <ClCompile Include="Source\Private\Windows\MXWindow.cpp" />
+    <ClCompile Include="Source\Private\Windows\WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MXApp.h" />
-    <ClInclude Include="MXException.h" />
-    <ClInclude Include="MXGraphics.h" />
-    <ClInclude Include="MXKeyboardHandle.h" />
-    <ClInclude Include="MXMouseHandle.h" />
-    <ClInclude Include="MXWindow.h" />
-    <ClInclude Include="MXWindowException.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Source\Public\App\MXApp.h" />
+    <ClInclude Include="Source\Public\Exceptions\MXException.h" />
+    <ClInclude Include="Source\Public\Exceptions\MXWindowException.h" />
+    <ClInclude Include="Source\Public\Graphics\MXGraphics.h" />
+    <ClInclude Include="Source\Public\Input\MXKeyboardHandle.h" />
+    <ClInclude Include="Source\Public\Input\MXMouseHandle.h" />
+    <ClInclude Include="Source\Public\Windows\MXWindow.h" />
+    <ClInclude Include="Source\Public\Windows\MXWindowsSetup.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DirectX11.rc" />

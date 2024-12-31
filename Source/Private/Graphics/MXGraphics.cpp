@@ -1,8 +1,8 @@
 // Copyright (c) 2024, Made by Jan Puto :>
 
-#include "MXGraphics.h"
-#include "MXException.h"
-#include "MXWindowException.h"
+#include "Graphics/MXGraphics.h"
+#include "Exceptions/MXException.h"
+#include "Exceptions/MXWindowException.h"
 
 #pragma comment( lib, "d3d11.lib" )
 
@@ -52,10 +52,9 @@ MXGraphics::MXGraphics( HWND hWnd )
 
 	wrl::ComPtr< ID3D11Resource > BackBuffer = nullptr;
 	SwapChain->GetBuffer( 0, __uuidof( ID3D11Resource ), &BackBuffer );
-	if( BackBuffer )
+	if( BackBuffer.Get() != nullptr )
 	{
 		Device->CreateRenderTargetView( BackBuffer.Get(), nullptr, &RenderTargetView );
-		BackBuffer->Release();
 	}
 }
 

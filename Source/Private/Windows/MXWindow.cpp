@@ -4,8 +4,8 @@
 #include <sstream>
 #include "resource.h"
 #include "Windowsx.h"
-#include "MXGraphics.h"
-#include "MXWindowException.h"
+#include "Graphics/MXGraphics.h"
+#include "Exceptions/MXWindowException.h"
 
 MXWindow::MXWindowClass MXWindow::MXWindowClass::WindowClass;
 

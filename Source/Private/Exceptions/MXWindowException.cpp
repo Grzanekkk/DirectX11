@@ -1,5 +1,5 @@
 // Copyright (c) 2024, Made by Jan Puto :>
-#include "MXWindowException.h"
+#include "Exceptions/MXWindowException.h"
 #include <sstream>
 
 MXWindowException::MXWindowException( int const Line, char const* File, HRESULT const hr )

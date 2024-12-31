@@ -1,7 +1,7 @@
 // Copyright (c) 2024, Made by Jan Puto :>
 
-#include "MXWindow.h"
-#include "MXApp.h"
+#include "Windows/MXWindow.h"
+#include "App/MXApp.h"
 #include <iostream>
 #include <sstream>
 

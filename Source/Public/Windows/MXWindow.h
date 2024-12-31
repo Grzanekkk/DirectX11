@@ -2,10 +2,10 @@
 
 #pragma once
 
-#include "MXWindowsSetup.h"
-#include "MXException.h"
-#include "MXKeyboardHandle.h"
-#include "MXMouseHandle.h"
+#include "Windows/MXWindowsSetup.h"
+#include "Exceptions/MXException.h"
+#include "Input/MXKeyboardHandle.h"
+#include "Input/MXMouseHandle.h"
 #include <optional>
 #include <memory>
 
