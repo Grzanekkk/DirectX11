@@ -32,5 +32,6 @@ void MXApp::Tick()
 	float const Green = dis( gen );
 
 	WindowHandle.GetGraphics().ClearBuffer( Red, Green, 1.f );
+	WindowHandle.GetGraphics().DrawTestTriangle();
 	WindowHandle.GetGraphics().EndFrame();
 }

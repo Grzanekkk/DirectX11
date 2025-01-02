@@ -3,8 +3,11 @@
 #include "Graphics/MXGraphics.h"
 #include "Exceptions/MXException.h"
 #include "Exceptions/MXWindowException.h"
+#include "Graphics/MXGraphicsTypes.h"
+#include "d3dcompiler.h"
 
 #pragma comment( lib, "d3d11.lib" )
+#pragma comment( lib, "d3dcompiler.lib" )
 
 namespace wrl = Microsoft::WRL;
 
@@ -70,4 +73,51 @@ void MXGraphics::ClearBuffer( float const R, float const G, float const B )
 	{
 		DeviceContext->ClearRenderTargetView( RenderTargetView.Get(), color );
 	}
+}
+
+void MXGraphics::DrawTestTriangle()
+{
+	HRESULT hr;
+
+	Vertex const Vertices[] = { { 0.0f, 0.5f, 1.0f }, { 0.5f, -0.5f, 1.0f }, { 0.5f, -0.5f, 1.0f } };
+
+	UINT const Stride = sizeof( Vertex );
+	UINT const Offset = 0u;
+
+	wrl::ComPtr< ID3D11Buffer > VertexBuffer = nullptr;
+	D3D11_BUFFER_DESC BuffferDesc;
+	BuffferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+	BuffferDesc.Usage = D3D11_USAGE_DEFAULT;
+	BuffferDesc.CPUAccessFlags = 0u;
+	BuffferDesc.MiscFlags = 0u;
+	BuffferDesc.ByteWidth = sizeof( Vertices );
+	BuffferDesc.StructureByteStride = Stride;
+
+	D3D11_SUBRESOURCE_DATA SubresourceData;
+	SubresourceData.pSysMem = Vertices;
+
+	hr = Device->CreateBuffer( &BuffferDesc, &SubresourceData, &VertexBuffer );
+	if( FAILED( hr ) || VertexBuffer.Get() == nullptr )
+	{
+		throw MXWND_EXCEPTION( hr );
+	}
+
+	DeviceContext->IASetVertexBuffers( 0u, 1, &VertexBuffer, &Stride, &Offset );
+
+	// Create VertexShader
+	wrl::ComPtr< ID3D11VertexShader > VertexShader = nullptr;
+	wrl::ComPtr< ID3DBlob > Blob = nullptr;
+	hr = D3DReadFileToBlob( L"Shader/Compiled/VertexShader.cso", &Blob );
+	if( FAILED( hr ) )
+	{
+		throw MXWND_EXCEPTION( hr );
+	}
+
+	hr = Device->CreateVertexShader( Blob->GetBufferPointer(), Blob->GetBufferSize(), nullptr, &VertexShader );
+	if( FAILED( hr ) )
+	{
+		throw MXWND_EXCEPTION( hr );
+	}
+
+	DeviceContext->Draw( 3u, 0 );
 }
