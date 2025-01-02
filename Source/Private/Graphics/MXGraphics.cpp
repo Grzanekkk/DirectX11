@@ -79,7 +79,7 @@ void MXGraphics::DrawTestTriangle()
 {
 	HRESULT hr;
 
-	Vertex const Vertices[] = { { 0.0f, 0.5f, 1.0f }, { 0.5f, -0.5f, 1.0f }, { 0.5f, -0.5f, 1.0f } };
+	Vertex const Vertices[] = { { 0.0f, 0.5f, 1.0f }, { 0.5f, -0.5f, 1.0f }, { -0.5f, -0.5f, 1.0f } };
 
 	UINT const Stride = sizeof( Vertex );
 	UINT const Offset = 0u;
@@ -102,11 +102,29 @@ void MXGraphics::DrawTestTriangle()
 		throw MXWND_EXCEPTION( hr );
 	}
 
-	DeviceContext->IASetVertexBuffers( 0u, 1, &VertexBuffer, &Stride, &Offset );
+	DeviceContext->IASetVertexBuffers( 0u, 1, VertexBuffer.GetAddressOf(), &Stride, &Offset );
+
+	// Create PixelShader
+	wrl::ComPtr< ID3D11PixelShader > PixelShader = nullptr;
+	wrl::ComPtr< ID3DBlob > Blob = nullptr;
+	hr = D3DReadFileToBlob( L"Shader/Compiled/PixelShader.cso", &Blob );
+	if( FAILED( hr ) )
+	{
+		throw MXWND_EXCEPTION( hr );
+	}
+
+	hr = Device->CreatePixelShader( Blob->GetBufferPointer(), Blob->GetBufferSize(), nullptr, &PixelShader );
+	if( FAILED( hr ) )
+	{
+		throw MXWND_EXCEPTION( hr );
+	}
+
+	// Bind created pixel shader
+	DeviceContext->PSSetShader( PixelShader.Get(), nullptr, 0u );
 
 	// Create VertexShader
 	wrl::ComPtr< ID3D11VertexShader > VertexShader = nullptr;
-	wrl::ComPtr< ID3DBlob > Blob = nullptr;
+
 	hr = D3DReadFileToBlob( L"Shader/Compiled/VertexShader.cso", &Blob );
 	if( FAILED( hr ) )
 	{
@@ -119,5 +137,37 @@ void MXGraphics::DrawTestTriangle()
 		throw MXWND_EXCEPTION( hr );
 	}
 
-	DeviceContext->Draw( 3u, 0 );
+	// Bind created vertex shader
+	DeviceContext->VSSetShader( VertexShader.Get(), nullptr, 0u );
+
+	// Input layout
+	wrl::ComPtr< ID3D11InputLayout > InputLayout = nullptr;
+	D3D11_INPUT_ELEMENT_DESC const IED[] = { { "Position", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 } };
+
+	hr = Device->CreateInputLayout( IED, ( UINT ) std::size( IED ), Blob->GetBufferPointer(), Blob->GetBufferSize(), &InputLayout );
+	if( FAILED( hr ) )
+	{
+		throw MXWND_EXCEPTION( hr );
+	}
+
+	DeviceContext->IASetInputLayout( InputLayout.Get() );
+
+	// Bind RenderTarget
+	DeviceContext->OMSetRenderTargets( 1u, RenderTargetView.GetAddressOf(), nullptr );
+
+	// Set topology type
+	DeviceContext->IASetPrimitiveTopology( D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST );
+
+	// Configure viewport
+	D3D11_VIEWPORT ViewportConfig;
+	ViewportConfig.Width = 800; // FIXME: figure this out properly
+	ViewportConfig.Height = 600;
+	ViewportConfig.MinDepth = 0;
+	ViewportConfig.MaxDepth = 1;
+	ViewportConfig.TopLeftX = 0;
+	ViewportConfig.TopLeftY = 0;
+	DeviceContext->RSSetViewports( 1u, &ViewportConfig );
+
+	// Draw
+	DeviceContext->Draw( ( UINT ) std::size( Vertices ), 0 );
 }
