@@ -79,30 +79,65 @@ void MXGraphics::DrawTestTriangle()
 {
 	HRESULT hr;
 
-	FVertex const Vertices[] = { { 0.0f, 0.5f, 1.0f, FColor1Bit( 255, 0, 0 ) }, { 0.5f, -0.5f, 1.0f, FColor1Bit( 0, 255, 0 ) }, { -0.5f, -0.5f, 1.0f, FColor1Bit( 0, 0, 255 ) } };
+	FVertex const Vertices[] = { 
+		{ 0.0f, 0.5f, 1.0f, FColor1Bit( 255, 0, 0 ) },
+		{ 0.5f, -0.5f, 1.0f, FColor1Bit( 0, 255, 0 ) },
+		{ -0.5f, -0.5f, 1.0f, FColor1Bit( 0, 0, 255 ) }, 
+		{ -0.3f, 0.3f, 1.0f, FColor1Bit( 255, 255, 0 ) }, 
+		{ 0.3f, 0.3f, 1.0f, FColor1Bit( 255, 0, 255 ) }, 
+		{ 0.0f, -0.8f, 1.0f, FColor1Bit( 0, 255, 255 ) } 
+	};
 
 	UINT const Stride = sizeof( FVertex );
 	UINT const Offset = 0u;
 
 	wrl::ComPtr< ID3D11Buffer > VertexBuffer = nullptr;
-	D3D11_BUFFER_DESC BuffferDesc;
-	BuffferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-	BuffferDesc.Usage = D3D11_USAGE_DEFAULT;
-	BuffferDesc.CPUAccessFlags = 0u;
-	BuffferDesc.MiscFlags = 0u;
-	BuffferDesc.ByteWidth = sizeof( Vertices );
-	BuffferDesc.StructureByteStride = Stride;
+	D3D11_BUFFER_DESC VertexBuffferDesc;
+	VertexBuffferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+	VertexBuffferDesc.Usage = D3D11_USAGE_DEFAULT;
+	VertexBuffferDesc.CPUAccessFlags = 0u;
+	VertexBuffferDesc.MiscFlags = 0u;
+	VertexBuffferDesc.ByteWidth = sizeof( Vertices );
+	VertexBuffferDesc.StructureByteStride = Stride;
 
-	D3D11_SUBRESOURCE_DATA SubresourceData;
-	SubresourceData.pSysMem = Vertices;
+	D3D11_SUBRESOURCE_DATA SubresourceVertexData;
+	SubresourceVertexData.pSysMem = Vertices;
 
-	hr = Device->CreateBuffer( &BuffferDesc, &SubresourceData, &VertexBuffer );
+	hr = Device->CreateBuffer( &VertexBuffferDesc, &SubresourceVertexData, &VertexBuffer );
 	if( FAILED( hr ) || VertexBuffer.Get() == nullptr )
 	{
 		throw MXWND_EXCEPTION( hr );
 	}
 
 	DeviceContext->IASetVertexBuffers( 0u, 1, VertexBuffer.GetAddressOf(), &Stride, &Offset );
+
+	unsigned short const Indices[] = {
+		0, 1, 2,
+		0, 2, 3,
+		0, 4, 1,
+		2, 1, 5,
+	};
+
+	wrl::ComPtr< ID3D11Buffer > IndexBuffer = nullptr;
+	D3D11_BUFFER_DESC IndexBuffferDesc;
+	IndexBuffferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
+	IndexBuffferDesc.Usage = D3D11_USAGE_DEFAULT;
+	IndexBuffferDesc.CPUAccessFlags = 0u;
+	IndexBuffferDesc.MiscFlags = 0u;
+	IndexBuffferDesc.ByteWidth = sizeof( Indices );
+	IndexBuffferDesc.StructureByteStride = sizeof( unsigned short );
+
+	D3D11_SUBRESOURCE_DATA SubresourceIndexData;
+	SubresourceIndexData.pSysMem = Indices;
+
+	hr = Device->CreateBuffer( &IndexBuffferDesc, &SubresourceIndexData, &IndexBuffer );
+	if( FAILED( hr ) || IndexBuffer.Get() == nullptr )
+	{
+		throw MXWND_EXCEPTION( hr );
+	}
+
+	DeviceContext->IASetIndexBuffer( IndexBuffer.Get(), DXGI_FORMAT_R16_UINT, 0u );
+
 
 	// Create PixelShader
 	wrl::ComPtr< ID3D11PixelShader > PixelShader = nullptr;
@@ -170,5 +205,6 @@ void MXGraphics::DrawTestTriangle()
 	DeviceContext->RSSetViewports( 1u, &ViewportConfig );
 
 	// Draw
-	DeviceContext->Draw( ( UINT ) std::size( Vertices ), 0 );
+	//DeviceContext->Draw( ( UINT ) std::size( Vertices ), 0 );
+	DeviceContext->DrawIndexed( ( UINT ) std::size( Indices ), 0u, 0u );
 }
