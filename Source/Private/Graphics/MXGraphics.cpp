@@ -79,9 +79,9 @@ void MXGraphics::DrawTestTriangle()
 {
 	HRESULT hr;
 
-	Vertex const Vertices[] = { { 0.0f, 0.5f, 1.0f }, { 0.5f, -0.5f, 1.0f }, { -0.5f, -0.5f, 1.0f } };
+	FVertex const Vertices[] = { { 0.0f, 0.5f, 1.0f, FColor1Bit( 255, 0, 0 ) }, { 0.5f, -0.5f, 1.0f, FColor1Bit( 0, 255, 0 ) }, { -0.5f, -0.5f, 1.0f, FColor1Bit( 0, 0, 255 ) } };
 
-	UINT const Stride = sizeof( Vertex );
+	UINT const Stride = sizeof( FVertex );
 	UINT const Offset = 0u;
 
 	wrl::ComPtr< ID3D11Buffer > VertexBuffer = nullptr;
@@ -142,7 +142,8 @@ void MXGraphics::DrawTestTriangle()
 
 	// Input layout
 	wrl::ComPtr< ID3D11InputLayout > InputLayout = nullptr;
-	D3D11_INPUT_ELEMENT_DESC const IED[] = { { "Position", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 } };
+	D3D11_INPUT_ELEMENT_DESC const IED[] = { { "Position", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+		{ "Color", 0, DXGI_FORMAT_R8G8B8A8_UNORM, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 } };
 
 	hr = Device->CreateInputLayout( IED, ( UINT ) std::size( IED ), Blob->GetBufferPointer(), Blob->GetBufferSize(), &InputLayout );
 	if( FAILED( hr ) )

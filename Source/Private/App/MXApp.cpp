@@ -25,13 +25,19 @@ int MXApp::StartApp()
 
 void MXApp::Tick()
 {
-	std::random_device rd;
-	std::mt19937 gen( rd() );
-	std::uniform_real_distribution< float > dis( 0.0, 1.0 );
-	float const Red = dis( gen );
-	float const Green = dis( gen );
+	TempTickCounter++;
+	if( TempTickCounter > 30 )
+	{
+		TempTickCounter = 0;
+		std::random_device rd;
+		std::mt19937 gen( rd() );
+		std::uniform_real_distribution< float > dis( 0.0, 1.0 );
+		float const Red = dis( gen );
+		float const Green = dis( gen );
+		BackGroudColor = FColor( Red, Green, 1.f );
+	}
 
-	WindowHandle.GetGraphics().ClearBuffer( Red, Green, 1.f );
+	WindowHandle.GetGraphics().ClearBuffer( BackGroudColor.R, BackGroudColor.G, BackGroudColor.G );
 	WindowHandle.GetGraphics().DrawTestTriangle();
 	WindowHandle.GetGraphics().EndFrame();
 }
