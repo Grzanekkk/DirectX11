@@ -4,9 +4,10 @@
 #include "Windows/MXWindow.h"
 #include "Graphics/MXGraphics.h"
 #include <random>
+#include <iostream>
 
 MXApp::MXApp()
-	: WindowHandle{ 800, 600, "TOYOTA" }
+	: WindowHandle{ WindowWidth, WindowHeight, "TOYOTA" }
 {
 }
 
@@ -39,7 +40,12 @@ void MXApp::Tick()
 
 	CurrentRotation += RotationSpeed;
 
+	float const TriangleX = WindowHandle.GetMouseHandle().GetPosX() / ( float ) WindowWidth * 2.f - 1.f;
+	float const TriangleY = -WindowHandle.GetMouseHandle().GetPosY() / ( float ) WindowHeight * 2.f + 1.f;
+
+	std::cout << "X:" << TriangleX << std::endl;
+	std::cout << "Y:" << TriangleY << std::endl;
 	WindowHandle.GetGraphics().ClearBuffer( BackGroudColor.R, BackGroudColor.G, BackGroudColor.G );
-	WindowHandle.GetGraphics().DrawTestTriangle( CurrentRotation );
+	WindowHandle.GetGraphics().DrawTestTriangle( CurrentRotation, TriangleX, TriangleY );
 	WindowHandle.GetGraphics().EndFrame();
 }

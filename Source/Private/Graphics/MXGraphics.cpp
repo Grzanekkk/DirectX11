@@ -78,7 +78,7 @@ void MXGraphics::ClearBuffer( float const R, float const G, float const B )
 	}
 }
 
-void MXGraphics::DrawTestTriangle( float const angle )
+void MXGraphics::DrawTestTriangle( float const angle, float const X, float const Y )
 {
 	HRESULT hr;
 	// clang-format off
@@ -115,7 +115,6 @@ void MXGraphics::DrawTestTriangle( float const angle )
 
 	DeviceContext->IASetVertexBuffers( 0u, 1, VertexBuffer.GetAddressOf(), &Stride, &Offset );
 
-	// clang-format off
 	// Constant buffer for matrix transformation
 	struct FConstantBuffer
 	{
@@ -123,12 +122,12 @@ void MXGraphics::DrawTestTriangle( float const angle )
 	};
 
 	// Figure this out properly
-	float AspectRation = 600.f / 800.f;
+	float const AspectRation = 600.f / 800.f;
 
-	FConstantBuffer const ConstantBuffer = 
-	{
+	FConstantBuffer const ConstantBuffer = {
 		// Transpose makes it column major which is what GPU expects
-		dx::XMMatrixTranspose(dx::XMMatrixRotationZ(angle) * dx::XMMatrixScaling(AspectRation, AspectRation, 1.0f))
+		dx::XMMatrixTranspose(
+			dx::XMMatrixRotationZ( angle ) * dx::XMMatrixScaling( AspectRation, AspectRation, 1.0f ) * dx::XMMatrixTranslation( X, Y, 0 ) )
 		//{
 		//	AspectRation *  std::cos(angle), std::sin(angle), 0.0f, 0.0f,
 		//	AspectRation * -std::sin(angle), std::cos(angle), 0.0f, 0.0f,
@@ -136,7 +135,7 @@ void MXGraphics::DrawTestTriangle( float const angle )
 		//					0.0f,			 0.0f,			  0.0f, 1.0f
 		//}
 	};
-	
+
 	wrl::ComPtr< ID3D11Buffer > TransformConstBuffer = nullptr;
 	D3D11_BUFFER_DESC ConstatnBufferDesc;
 	ConstatnBufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
@@ -157,6 +156,7 @@ void MXGraphics::DrawTestTriangle( float const angle )
 
 	DeviceContext->VSSetConstantBuffers( 0u, 1u, TransformConstBuffer.GetAddressOf() );
 
+	// clang-format off
 	// Index buffer
 	unsigned short const Indices[] = {
 		0, 1, 2,

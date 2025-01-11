@@ -16,7 +16,7 @@ public:
 public:
 	void EndFrame();
 	void ClearBuffer( float const R, float const G, float const B );
-	void DrawTestTriangle( float const angle );
+	void DrawTestTriangle( float const angle, float const X, float const Y );
 
 private:
 	Microsoft::WRL::ComPtr< ID3D11Device > Device = nullptr;

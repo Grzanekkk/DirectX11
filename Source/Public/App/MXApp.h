@@ -14,6 +14,8 @@ public:
 	void Tick();
 
 private:
+	int WindowHeight = 600;
+	int WindowWidth = 800;
 	MXWindow WindowHandle;
 	int TempTickCounter = 0;
 	FColor BackGroudColor = FColor( 0.f, 0.f, 1.f );
