@@ -6,11 +6,13 @@
 #include "Graphics/MXGraphicsTypes.h"
 #include "d3dcompiler.h"
 #include <cmath>
+#include <DirectXMath.h>
 
 #pragma comment( lib, "d3d11.lib" )
 #pragma comment( lib, "d3dcompiler.lib" )
 
 namespace wrl = Microsoft::WRL;
+namespace dx = DirectX;
 
 MXGraphics::MXGraphics( HWND hWnd )
 {
@@ -117,23 +119,22 @@ void MXGraphics::DrawTestTriangle( float const angle )
 	// Constant buffer for matrix transformation
 	struct FConstantBuffer
 	{
-		struct
-		{
-			float element[ 4 ][ 4 ];
-		} transformation;
+		dx::XMMATRIX transform;
 	};
 
 	// Figure this out properly
 	float AspectRation = 600.f / 800.f;
 
 	FConstantBuffer const ConstantBuffer = 
-	{ 
-		{
-			AspectRation *  std::cos(angle), std::sin(angle), 0.0f, 0.0f,
-			AspectRation * -std::sin(angle), std::cos(angle), 0.0f, 0.0f,
-							0.0f,			 0.0f,			  1.0f, 0.0f,
-							0.0f,			 0.0f,			  0.0f, 1.0f
-		}
+	{
+		// Transpose makes it column major which is what GPU expects
+		dx::XMMatrixTranspose(dx::XMMatrixRotationZ(angle) * dx::XMMatrixScaling(AspectRation, AspectRation, 1.0f))
+		//{
+		//	AspectRation *  std::cos(angle), std::sin(angle), 0.0f, 0.0f,
+		//	AspectRation * -std::sin(angle), std::cos(angle), 0.0f, 0.0f,
+		//					0.0f,			 0.0f,			  1.0f, 0.0f,
+		//					0.0f,			 0.0f,			  0.0f, 1.0f
+		//}
 	};
 	
 	wrl::ComPtr< ID3D11Buffer > TransformConstBuffer = nullptr;
