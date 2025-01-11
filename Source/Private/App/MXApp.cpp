@@ -37,7 +37,9 @@ void MXApp::Tick()
 		BackGroudColor = FColor( Red, Green, 1.f );
 	}
 
+	CurrentRotation += RotationSpeed;
+
 	WindowHandle.GetGraphics().ClearBuffer( BackGroudColor.R, BackGroudColor.G, BackGroudColor.G );
-	WindowHandle.GetGraphics().DrawTestTriangle();
+	WindowHandle.GetGraphics().DrawTestTriangle( CurrentRotation );
 	WindowHandle.GetGraphics().EndFrame();
 }

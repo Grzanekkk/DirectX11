@@ -17,4 +17,6 @@ private:
 	MXWindow WindowHandle;
 	int TempTickCounter = 0;
 	FColor BackGroudColor = FColor( 0.f, 0.f, 1.f );
+	float CurrentRotation = 0.f;
+	float RotationSpeed = 0.01;
 };
