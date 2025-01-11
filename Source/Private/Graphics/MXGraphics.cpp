@@ -80,9 +80,9 @@ void MXGraphics::DrawTestTriangle()
 	HRESULT hr;
 
 	FVertex const Vertices[] = { 
-		{ 0.0f, 0.5f, 1.0f, FColor1Bit( 255, 0, 0 ) },
+		{ 0.0f, 0.5f, 1.0f, FColor1Bit( 255, 126, 0) },
 		{ 0.5f, -0.5f, 1.0f, FColor1Bit( 0, 255, 0 ) },
-		{ -0.5f, -0.5f, 1.0f, FColor1Bit( 0, 0, 255 ) }, 
+		{ -0.5f, -0.5f, 1.0f, FColor1Bit( 0, 126, 255 ) }, 
 		{ -0.3f, 0.3f, 1.0f, FColor1Bit( 255, 255, 0 ) }, 
 		{ 0.3f, 0.3f, 1.0f, FColor1Bit( 255, 0, 255 ) }, 
 		{ 0.0f, -0.8f, 1.0f, FColor1Bit( 0, 255, 255 ) } 
