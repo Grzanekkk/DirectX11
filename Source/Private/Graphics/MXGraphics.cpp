@@ -82,15 +82,7 @@ void MXGraphics::DrawTestTriangle( float const angle, float const X, float const
 {
 	HRESULT hr;
 	// clang-format off
-	//FVertex const Vertices[] = { 
-	//	{ 0.0f, 0.5f, 1.0f, FColor1Bit( 255, 126, 0) },
-	//	{ 0.5f, -0.5f, 1.0f, FColor1Bit( 0, 255, 0 ) },
-	//	{ -0.5f, -0.5f, 1.0f, FColor1Bit( 0, 126, 255 ) }, 
-	//	{ -0.3f, 0.3f, 1.0f, FColor1Bit( 255, 255, 0 ) }, 
-	//	{ 0.3f, 0.3f, 1.0f, FColor1Bit( 255, 0, 255 ) }, 
-	//	{ 0.0f, -0.8f, 1.0f, FColor1Bit( 0, 255, 255 ) } 
-	//};
-	
+
 	FVertex const Vertices[] = { 
 		{ -1.0f, -1.0f, -1.0f, FColor1Bit( 255, 126, 0) },
 		{ 1.0f, -1.0f, -1.0f, FColor1Bit( 0, 255, 0 ) },
@@ -101,7 +93,6 @@ void MXGraphics::DrawTestTriangle( float const angle, float const X, float const
 		{ -1.0f, 1.0f, 1.0f, FColor1Bit( 0, 255, 255 ) },
 		{ 1.0f, 1.0f, 1.0f, FColor1Bit( 156, 0, 256 ) } 
 	};
-
 	// clang-format on
 
 	UINT const Stride = sizeof( FVertex );
@@ -170,12 +161,6 @@ void MXGraphics::DrawTestTriangle( float const angle, float const X, float const
 
 	// clang-format off
 	// Index buffer
-	/*unsigned short const Indices[] = {
-		0, 1, 2,
-		0, 2, 3,
-		0, 4, 1,
-		2, 1, 5,
-	};*/
 	unsigned short const Indices[] = {
 		0, 2, 1,	2, 3, 1,
 		1, 3, 5,	3, 7, 5,
@@ -275,6 +260,5 @@ void MXGraphics::DrawTestTriangle( float const angle, float const X, float const
 	DeviceContext->RSSetViewports( 1u, &ViewportConfig );
 
 	// Draw
-	// DeviceContext->Draw( ( UINT ) std::size( Vertices ), 0 );
 	DeviceContext->DrawIndexed( ( UINT ) std::size( Indices ), 0u, 0u );
 }
