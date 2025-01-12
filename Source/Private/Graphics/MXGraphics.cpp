@@ -82,14 +82,26 @@ void MXGraphics::DrawTestTriangle( float const angle, float const X, float const
 {
 	HRESULT hr;
 	// clang-format off
+	//FVertex const Vertices[] = { 
+	//	{ 0.0f, 0.5f, 1.0f, FColor1Bit( 255, 126, 0) },
+	//	{ 0.5f, -0.5f, 1.0f, FColor1Bit( 0, 255, 0 ) },
+	//	{ -0.5f, -0.5f, 1.0f, FColor1Bit( 0, 126, 255 ) }, 
+	//	{ -0.3f, 0.3f, 1.0f, FColor1Bit( 255, 255, 0 ) }, 
+	//	{ 0.3f, 0.3f, 1.0f, FColor1Bit( 255, 0, 255 ) }, 
+	//	{ 0.0f, -0.8f, 1.0f, FColor1Bit( 0, 255, 255 ) } 
+	//};
+	
 	FVertex const Vertices[] = { 
-		{ 0.0f, 0.5f, 1.0f, FColor1Bit( 255, 126, 0) },
-		{ 0.5f, -0.5f, 1.0f, FColor1Bit( 0, 255, 0 ) },
-		{ -0.5f, -0.5f, 1.0f, FColor1Bit( 0, 126, 255 ) }, 
-		{ -0.3f, 0.3f, 1.0f, FColor1Bit( 255, 255, 0 ) }, 
-		{ 0.3f, 0.3f, 1.0f, FColor1Bit( 255, 0, 255 ) }, 
-		{ 0.0f, -0.8f, 1.0f, FColor1Bit( 0, 255, 255 ) } 
+		{ -1.0f, -1.0f, -1.0f, FColor1Bit( 255, 126, 0) },
+		{ 1.0f, -1.0f, -1.0f, FColor1Bit( 0, 255, 0 ) },
+		{ -1.0f, 1.0f, -1.0f, FColor1Bit( 0, 126, 255 ) }, 
+		{ 1.0f, 1.0f, -1.0f, FColor1Bit( 126, 255, 0 ) }, 
+		{ -1.0f, -1.0f, 1.0f, FColor1Bit( 255, 255, 0 ) }, 
+		{ 1.0f, -1.0f, 1.0f, FColor1Bit( 255, 0, 255 ) }, 
+		{ -1.0f, 1.0f, 1.0f, FColor1Bit( 0, 255, 255 ) },
+		{ 1.0f, 1.0f, 1.0f, FColor1Bit( 156, 0, 256 ) } 
 	};
+
 	// clang-format on
 
 	UINT const Stride = sizeof( FVertex );
@@ -124,17 +136,17 @@ void MXGraphics::DrawTestTriangle( float const angle, float const X, float const
 	// Figure this out properly
 	float const AspectRation = 600.f / 800.f;
 
+	// clang-format off
 	FConstantBuffer const ConstantBuffer = {
 		// Transpose makes it column major which is what GPU expects
-		dx::XMMatrixTranspose(
-			dx::XMMatrixRotationZ( angle ) * dx::XMMatrixScaling( AspectRation, AspectRation, 1.0f ) * dx::XMMatrixTranslation( X, Y, 0 ) )
-		//{
-		//	AspectRation *  std::cos(angle), std::sin(angle), 0.0f, 0.0f,
-		//	AspectRation * -std::sin(angle), std::cos(angle), 0.0f, 0.0f,
-		//					0.0f,			 0.0f,			  1.0f, 0.0f,
-		//					0.0f,			 0.0f,			  0.0f, 1.0f
-		//}
+		dx::XMMatrixTranspose( 
+			dx::XMMatrixRotationZ( angle ) *
+			dx::XMMatrixRotationX( angle ) *
+			dx::XMMatrixTranslation( X, Y, 5.f ) *
+			dx::XMMatrixPerspectiveFovLH( 1.0f, AspectRation, 0.5f, 20.0f ) 
+		)
 	};
+	// clang-format on
 
 	wrl::ComPtr< ID3D11Buffer > TransformConstBuffer = nullptr;
 	D3D11_BUFFER_DESC ConstatnBufferDesc;
@@ -158,11 +170,19 @@ void MXGraphics::DrawTestTriangle( float const angle, float const X, float const
 
 	// clang-format off
 	// Index buffer
-	unsigned short const Indices[] = {
+	/*unsigned short const Indices[] = {
 		0, 1, 2,
 		0, 2, 3,
 		0, 4, 1,
 		2, 1, 5,
+	};*/
+	unsigned short const Indices[] = {
+		0, 2, 1,	2, 3, 1,
+		1, 3, 5,	3, 7, 5,
+		2, 6, 3,	3, 6, 7,
+		4, 5, 7,	4, 7, 6,
+		0, 4, 2,	2, 4, 6,
+		0, 1, 4,	1, 5, 4
 	};
 	// clang-format on
 

@@ -12,7 +12,7 @@ cbuffer ConstBuffer
 VSOut main( float3 pos : Position, float3 color : Color ) 
 {
     VSOut vsout;
-    vsout.pos = mul( float4( pos.x, pos.y, pos.z, 1.0f ), transform );
+    vsout.pos = mul( float4( pos, 1.0f ), transform );
     vsout.color = color;
     return vsout;
 }
