@@ -16,34 +16,58 @@
     <Filter Include="Header Files\Shader">
       <UniqueIdentifier>{c35cf23d-6f6f-4ad1-b7b8-92027d5b516a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Input">
+      <UniqueIdentifier>{b9644923-8ee0-4568-8ab2-c8a90603023f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Input">
+      <UniqueIdentifier>{e65f0ffc-b77a-40f9-8c9e-cd13fa1e8523}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Exceptions">
+      <UniqueIdentifier>{c0d35f90-49a6-4bb2-b0e9-b0c09f0f5e7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Exceptions">
+      <UniqueIdentifier>{c871bbad-d3c3-4130-84a8-864973ca5c9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Graphics">
+      <UniqueIdentifier>{92b0b269-c1b7-4a82-a1e2-fdeb32ef6405}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Graphics">
+      <UniqueIdentifier>{a0bf3dd8-9d48-4739-a0ad-96c276877b21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Windows">
+      <UniqueIdentifier>{0165f718-a7d4-4b82-8a58-530e5259e9cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Windows">
+      <UniqueIdentifier>{feed864a-a4bf-4c7d-8933-61c17b9ebe77}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Private\App\MXApp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Private\Exceptions\MXException.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Private\Exceptions\MXWindowException.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Source\Private\Input\MXMouseHandle.cpp">
+      <Filter>Source Files\Input</Filter>
     </ClCompile>
     <ClCompile Include="Source\Private\Input\MXKeyboardHandle.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Input</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Private\Input\MXMouseHandle.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Source\Private\Exceptions\MXException.cpp">
+      <Filter>Source Files\Exceptions</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Private\Exceptions\MXWindowException.cpp">
+      <Filter>Source Files\Exceptions</Filter>
     </ClCompile>
     <ClCompile Include="Source\Private\Graphics\MXGraphics.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Private\Windows\MXWindow.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Private\Windows\WinMain.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="Source\Private\Graphics\MXGraphicsTypes.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Private\Windows\WinMain.cpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Private\Windows\MXWindow.cpp">
+      <Filter>Source Files\Windows</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -53,29 +77,29 @@
     <ClInclude Include="Source\Public\App\MXApp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Public\Exceptions\MXException.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Public\Exceptions\MXWindowException.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Public\Graphics\MXGraphics.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Public\Input\MXKeyboardHandle.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Input</Filter>
     </ClInclude>
     <ClInclude Include="Source\Public\Input\MXMouseHandle.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Input</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Public\Windows\MXWindow.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Source\Public\Exceptions\MXWindowException.h">
+      <Filter>Header Files\Exceptions</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Public\Windows\MXWindowsSetup.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Source\Public\Exceptions\MXException.h">
+      <Filter>Header Files\Exceptions</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Public\Graphics\MXGraphics.h">
+      <Filter>Header Files\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Source\Public\Graphics\MXGraphicsTypes.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Public\Windows\MXWindow.h">
+      <Filter>Header Files\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Public\Windows\MXWindowsSetup.h">
+      <Filter>Header Files\Windows</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
