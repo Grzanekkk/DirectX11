@@ -25,9 +25,8 @@ public:
 struct FVertex
 {
 public:
-	FVertex( float const X, float const Y, float const Z, FColor1Bit const Color );
+	FVertex( float const X, float const Y, float const Z );
 	float X;
 	float Y;
 	float Z;
-	FColor1Bit Color;
 };

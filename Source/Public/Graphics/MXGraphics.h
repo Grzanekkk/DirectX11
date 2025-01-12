@@ -8,7 +8,7 @@
 class MXGraphics
 {
 public:
-	MXGraphics( HWND hWnd );
+	MXGraphics( HWND hWnd, float const Height, float const Width );
 	MXGraphics( MXGraphics const& Other ) = delete;
 	MXGraphics& operator=( MXGraphics const& ) = delete;
 	~MXGraphics() = default;
@@ -23,4 +23,8 @@ private:
 	Microsoft::WRL::ComPtr< ID3D11DeviceContext > DeviceContext = nullptr;
 	Microsoft::WRL::ComPtr< IDXGISwapChain > SwapChain = nullptr;
 	Microsoft::WRL::ComPtr< ID3D11RenderTargetView > RenderTargetView = nullptr;
+	Microsoft::WRL::ComPtr< ID3D11DepthStencilView > DepthStencilView = nullptr;
+
+	float ScreenHeight = 0;
+	float ScreenWidth = 0;
 };

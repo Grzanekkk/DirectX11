@@ -33,7 +33,7 @@ MXWindow::MXWindow( int const Width, int const Height, char const* Name )
 	ShowWindow( hWnd, SW_SHOWDEFAULT );
 
 	// Makes Graphics handle object for handling all graphics stuff (D11)
-	Graphics = std::make_unique< MXGraphics >( hWnd );
+	Graphics = std::make_unique< MXGraphics >( hWnd, Height, Width );
 }
 
 MXWindow::~MXWindow()

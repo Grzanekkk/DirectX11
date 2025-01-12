@@ -46,6 +46,7 @@ void MXApp::Tick()
 	std::cout << "X:" << TriangleX << std::endl;
 	std::cout << "Y:" << TriangleY << std::endl;
 	WindowHandle.GetGraphics().ClearBuffer( BackGroudColor.R, BackGroudColor.G, BackGroudColor.G );
-	WindowHandle.GetGraphics().DrawTestTriangle( CurrentRotation, TriangleX, TriangleY );
+	WindowHandle.GetGraphics().DrawTestTriangle( CurrentRotation, TriangleX, TriangleY * 2  );
+	WindowHandle.GetGraphics().DrawTestTriangle( -CurrentRotation + 66.f, 0.f, 0.f);
 	WindowHandle.GetGraphics().EndFrame();
 }

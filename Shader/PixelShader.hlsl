@@ -1,4 +1,9 @@
-float4 main(float3 color : Color) : Sv_Target
+cbuffer CBuf
 {
-    return float4(color, 1.f);
+    float4 FaceColor[6];
+}
+
+float4 main( uint TriangleID : SV_PrimitiveID ) : Sv_Target
+{
+    return FaceColor[ TriangleID / 2 ];
 }

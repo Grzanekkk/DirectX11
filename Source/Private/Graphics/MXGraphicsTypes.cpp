@@ -2,11 +2,10 @@
 
 #include "Graphics/MXGraphicsTypes.h"
 
-FVertex::FVertex( float const X, float const Y, float const Z, FColor1Bit const Color )
+FVertex::FVertex( float const X, float const Y, float const Z )
 	: X{ X }
 	, Y{ Y }
 	, Z{ Z }
-	, Color{ Color }
 {
 }
 
