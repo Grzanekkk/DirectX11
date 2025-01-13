@@ -40,6 +40,18 @@
     <Filter Include="Header Files\Windows">
       <UniqueIdentifier>{feed864a-a4bf-4c7d-8933-61c17b9ebe77}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Drawable">
+      <UniqueIdentifier>{d03668e3-cf20-43cd-9e8d-42e2042f1a73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Bindable">
+      <UniqueIdentifier>{3410f11d-cdb7-4ba4-8045-f0622d799dff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Drawable">
+      <UniqueIdentifier>{0efd5ace-804c-4785-a4a9-c572629be08d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Bindable">
+      <UniqueIdentifier>{71dd399b-5c72-4ed2-b47d-b714aeacb941}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Private\App\MXApp.cpp">
@@ -68,6 +80,12 @@
     </ClCompile>
     <ClCompile Include="Source\Private\Windows\MXWindow.cpp">
       <Filter>Source Files\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Private\Bindable\Bindable.cpp">
+      <Filter>Source Files\Bindable</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Private\Drawable\Drawable.cpp">
+      <Filter>Source Files\Drawable</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -100,6 +118,12 @@
     </ClInclude>
     <ClInclude Include="Source\Public\Windows\MXWindowsSetup.h">
       <Filter>Header Files\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Public\Drawable\Drawable.h">
+      <Filter>Header Files\Drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Public\Bindable\Bindable.h">
+      <Filter>Header Files\Bindable</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
