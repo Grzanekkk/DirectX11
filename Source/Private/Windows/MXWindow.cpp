@@ -27,7 +27,7 @@ MXWindow::MXWindow( int const Width, int const Height, char const* Name )
 
 	if( hWnd == nullptr )
 	{
-		throw MXWND_LAST_EXCEPTION();
+		MXWND_LAST_EXCEPTION();
 	}
 
 	ShowWindow( hWnd, SW_SHOWDEFAULT );
@@ -55,7 +55,7 @@ void MXWindow::SetTitle( std::string const& NewTitle )
 {
 	if( SetWindowText( hWnd, NewTitle.c_str() ) == 0 )
 	{
-		throw MXWND_LAST_EXCEPTION();
+		MXWND_LAST_EXCEPTION();
 	}
 }
 
@@ -81,7 +81,7 @@ MXGraphics& MXWindow::GetGraphics()
 	MXGraphics* const GraphicsPtr = Graphics.get();
 	if( Graphics == nullptr )
 	{
-		throw MX_EXCEPTION( "Graphics [MXGraphics] is not valid" );
+		MX_EXCEPTION( "Graphics [MXGraphics] is not valid" );
 	}
 
 	return *Graphics;

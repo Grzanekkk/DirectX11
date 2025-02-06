@@ -27,4 +27,4 @@ protected:
 	mutable std::string WhatBuffer;
 };
 
-#define MX_EXCEPTION( Message ) MXException( __LINE__, __FILE__, Message )
+#define MX_EXCEPTION( Message ) throw MXException( __LINE__, __FILE__, Message )

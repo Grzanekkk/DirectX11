@@ -16,5 +16,8 @@ void DDrawable::Draw( MXGraphics& Graphics )
 void DDrawable::AddBind( std::unique_ptr< BBindable > Bind )
 {
 	// DO CHECKS
-	Binds.push_back( std::move( Bind ) );
+	if( Bind )
+	{
+		Binds.push_back( std::move( Bind ) );
+	}
 }

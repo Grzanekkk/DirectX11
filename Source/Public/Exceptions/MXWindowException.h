@@ -18,5 +18,5 @@ protected:
 	HRESULT hr;
 };
 
-#define MXWND_EXCEPTION( hr ) MXWindowException( __LINE__, __FILE__, hr )
-#define MXWND_LAST_EXCEPTION() MXWindowException( __LINE__, __FILE__, GetLastError() )
+#define MXWND_EXCEPTION( hr ) throw MXWindowException( __LINE__, __FILE__, hr )
+#define MXWND_LAST_EXCEPTION() throw MXWindowException( __LINE__, __FILE__, GetLastError() )

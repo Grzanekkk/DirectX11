@@ -41,29 +41,29 @@ MXGraphics::MXGraphics( HWND hWnd, float const Height, float const Width )
 
 	if( FAILED( hr ) )
 	{
-		throw MXWND_EXCEPTION( hr );
+		MXWND_EXCEPTION( hr );
 	}
 
 	if( DeviceContext == nullptr )
 	{
-		throw MX_EXCEPTION( "Failed to create DeviceContext" );
+		MX_EXCEPTION( "Failed to create DeviceContext" );
 	}
 
 	if( SwapChain == nullptr )
 	{
-		throw MX_EXCEPTION( "Failed to create SwapChain" );
+		MX_EXCEPTION( "Failed to create SwapChain" );
 	}
 
 	if( Device == nullptr )
 	{
-		throw MX_EXCEPTION( "Failed to create Device" );
+		MX_EXCEPTION( "Failed to create Device" );
 	}
 
 	wrl::ComPtr< ID3D11Resource > BackBuffer = nullptr;
 	hr = SwapChain->GetBuffer( 0, __uuidof( ID3D11Resource ), &BackBuffer );
 	if( FAILED( hr ) || BackBuffer.Get() == nullptr )
 	{
-		throw MXWND_EXCEPTION( hr );
+		MXWND_EXCEPTION( hr );
 	}
 	Device->CreateRenderTargetView( BackBuffer.Get(), nullptr, &RenderTargetView );
 
@@ -77,7 +77,7 @@ MXGraphics::MXGraphics( HWND hWnd, float const Height, float const Width )
 	Device->CreateDepthStencilState( &DepthStencilDesc, &DepthStencilState );
 	if( FAILED( hr ) || DepthStencilState == nullptr )
 	{
-		throw MXWND_EXCEPTION( hr );
+		MXWND_EXCEPTION( hr );
 	}
 
 	DeviceContext->OMSetDepthStencilState( DepthStencilState.Get(), 1u );
@@ -98,7 +98,7 @@ MXGraphics::MXGraphics( HWND hWnd, float const Height, float const Width )
 	hr = Device->CreateTexture2D( &DepthTextureDesc, nullptr, &DepthStencilTexture );
 	if( FAILED( hr ) || DepthStencilTexture == nullptr )
 	{
-		throw MXWND_EXCEPTION( hr );
+		MXWND_EXCEPTION( hr );
 	}
 
 	D3D11_DEPTH_STENCIL_VIEW_DESC DSVDesc = {};
@@ -109,7 +109,7 @@ MXGraphics::MXGraphics( HWND hWnd, float const Height, float const Width )
 	hr = Device->CreateDepthStencilView( DepthStencilTexture.Get(), &DSVDesc, &DepthStencilView );
 	if( FAILED( hr ) || DepthStencilView == nullptr )
 	{
-		throw MXWND_EXCEPTION( hr );
+		MXWND_EXCEPTION( hr );
 	}
 
 	// Bind render target
@@ -131,7 +131,7 @@ void MXGraphics::ClearBuffer( float const R, float const G, float const B )
 	}
 	else
 	{
-		throw MX_EXCEPTION( "DeviceContext is null when trying to ClearBuffer!" );
+		MX_EXCEPTION( "DeviceContext is null when trying to ClearBuffer!" );
 	}
 }
 
@@ -170,7 +170,7 @@ void MXGraphics::DrawTestTriangle( float const angle, float const X, float const
 	hr = Device->CreateBuffer( &VertexBufferDesc, &SubresourceVertexData, &VertexBuffer );
 	if( FAILED( hr ) || VertexBuffer.Get() == nullptr )
 	{
-		throw MXWND_EXCEPTION( hr );
+		MXWND_EXCEPTION( hr );
 	}
 
 	DeviceContext->IASetVertexBuffers( 0u, 1, VertexBuffer.GetAddressOf(), &Stride, &Offset );
@@ -211,7 +211,7 @@ void MXGraphics::DrawTestTriangle( float const angle, float const X, float const
 	hr = Device->CreateBuffer( &ConstatnBufferDesc, &ConstBufferData, &TransformConstBuffer );
 	if( FAILED( hr ) || TransformConstBuffer.Get() == nullptr )
 	{
-		throw MXWND_EXCEPTION( hr );
+		MXWND_EXCEPTION( hr );
 	}
 
 	DeviceContext->VSSetConstantBuffers( 0u, 1u, TransformConstBuffer.GetAddressOf() );
@@ -253,7 +253,7 @@ void MXGraphics::DrawTestTriangle( float const angle, float const X, float const
 	hr = Device->CreateBuffer( &FaceColorConstBufferDesc, &FaceColorConstBufferData, &FaceColorConstBuffer );
 	if( FAILED( hr ) || FaceColorConstBuffer.Get() == nullptr )
 	{
-		throw MXWND_EXCEPTION( hr );
+		MXWND_EXCEPTION( hr );
 	}
 
 	DeviceContext->PSSetConstantBuffers( 0u, 1u, FaceColorConstBuffer.GetAddressOf() );
@@ -285,7 +285,7 @@ void MXGraphics::DrawTestTriangle( float const angle, float const X, float const
 	hr = Device->CreateBuffer( &IndexBufferDesc, &SubresourceIndexData, &IndexBuffer );
 	if( FAILED( hr ) || IndexBuffer.Get() == nullptr )
 	{
-		throw MXWND_EXCEPTION( hr );
+		MXWND_EXCEPTION( hr );
 	}
 
 	DeviceContext->IASetIndexBuffer( IndexBuffer.Get(), DXGI_FORMAT_R16_UINT, 0u );
@@ -296,13 +296,13 @@ void MXGraphics::DrawTestTriangle( float const angle, float const X, float const
 	hr = D3DReadFileToBlob( L"Shader/Compiled/PixelShader.cso", &Blob );
 	if( FAILED( hr ) )
 	{
-		throw MXWND_EXCEPTION( hr );
+		MXWND_EXCEPTION( hr );
 	}
 
 	hr = Device->CreatePixelShader( Blob->GetBufferPointer(), Blob->GetBufferSize(), nullptr, &PixelShader );
 	if( FAILED( hr ) )
 	{
-		throw MXWND_EXCEPTION( hr );
+		MXWND_EXCEPTION( hr );
 	}
 
 	// Bind created pixel shader
@@ -314,13 +314,13 @@ void MXGraphics::DrawTestTriangle( float const angle, float const X, float const
 	hr = D3DReadFileToBlob( L"Shader/Compiled/VertexShader.cso", &Blob );
 	if( FAILED( hr ) )
 	{
-		throw MXWND_EXCEPTION( hr );
+		MXWND_EXCEPTION( hr );
 	}
 
 	hr = Device->CreateVertexShader( Blob->GetBufferPointer(), Blob->GetBufferSize(), nullptr, &VertexShader );
 	if( FAILED( hr ) )
 	{
-		throw MXWND_EXCEPTION( hr );
+		MXWND_EXCEPTION( hr );
 	}
 
 	// Bind created vertex shader
@@ -337,7 +337,7 @@ void MXGraphics::DrawTestTriangle( float const angle, float const X, float const
 	hr = Device->CreateInputLayout( IED, ( UINT ) std::size( IED ), Blob->GetBufferPointer(), Blob->GetBufferSize(), &InputLayout );
 	if( FAILED( hr ) )
 	{
-		throw MXWND_EXCEPTION( hr );
+		MXWND_EXCEPTION( hr );
 	}
 
 	DeviceContext->IASetInputLayout( InputLayout.Get() );
