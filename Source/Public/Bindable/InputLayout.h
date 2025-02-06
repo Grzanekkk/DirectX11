@@ -6,7 +6,7 @@
 class BInputLayout : public BBindable
 {
 public:
-	BInputLayout( MXGraphics& Graphics, std::vector< D3D11_INPUT_ELEMENT_DESC > const& Layout, ID3DBlob* VertexShaderBytecode );
+	BInputLayout( MXGraphics& Graphics, std::vector< D3D11_INPUT_ELEMENT_DESC > const& Layout, ID3DBlob* const VertexShaderBytecode );
 	void Bind( MXGraphics& Graphics ) override;
 
 protected:

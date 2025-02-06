@@ -24,8 +24,6 @@ void DDrawable::Draw( MXGraphics& Graphics )
 
 void DDrawable::AddBind( std::unique_ptr< BBindable > Bind )
 {
-	// #FIXME DO CHECKS
-
 	if( Bind )
 	{
 		assert( "Must use AddIndexBuffer to bind index buffer" && typeid( *bind ) != typeid( IndexBuffer ) );

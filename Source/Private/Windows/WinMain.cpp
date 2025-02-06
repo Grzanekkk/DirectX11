@@ -2,9 +2,8 @@
 
 #include "Windows/MXWindow.h"
 #include "App/MXApp.h"
-#include <iostream>
-#include <sstream>
 
+//////////////////////////////////////////////////////////// ENTRY POINT ////////////////////////////////////////////////////////////
 int CALLBACK WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow )
 {
 	try

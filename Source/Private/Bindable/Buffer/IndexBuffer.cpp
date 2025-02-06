@@ -17,7 +17,7 @@ BIndexBuffer::BIndexBuffer( MXGraphics& Graphics, std::vector< unsigned short > 
 	D3D11_SUBRESOURCE_DATA SubresourceIndexData;
 	SubresourceIndexData.pSysMem = Indices.data();
 
-	HRESULT hr = GetDevice( Graphics )->CreateBuffer( &IndexBufferDesc, &SubresourceIndexData, &IndexBuffer );
+	HRESULT const hr = GetDevice( Graphics )->CreateBuffer( &IndexBufferDesc, &SubresourceIndexData, &IndexBuffer );
 	if( FAILED( hr ) || IndexBuffer.Get() == nullptr )
 	{
 		MXWND_EXCEPTION( hr );

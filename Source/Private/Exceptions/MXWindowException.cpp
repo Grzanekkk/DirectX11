@@ -26,7 +26,7 @@ HRESULT MXWindowException::GetErrorCode() const
 	return hr;
 }
 
-std::string const& MXWindowException::GetErrorMessage() const
+std::string const MXWindowException::GetErrorMessage() const
 {
 	return TranstaleErrorCode( hr );
 }
@@ -42,7 +42,7 @@ std::string MXWindowException::TranstaleErrorCode( HRESULT const hr )
 		return "Unknown error code";
 	}
 
-	std::string const ErrorString = MessageBuffer;
+	std::string const& ErrorString = MessageBuffer;
 	LocalFree( MessageBuffer );
 
 	return ErrorString;

@@ -48,7 +48,7 @@ std::string MXException::GetOriginString() const
 	return ErrorString.str();
 }
 
-std::string const& MXException::GetErrorMessage() const
+std::string const MXException::GetErrorMessage() const
 {
 	return Message;
 }
