@@ -113,6 +113,16 @@ MXGraphics::MXGraphics( HWND hWnd, unsigned int const Height, unsigned int const
 
 	// Bind render target
 	DeviceContext->OMSetRenderTargets( 1u, RenderTargetView.GetAddressOf(), DepthStencilView.Get() );
+
+	// configure viewport
+	D3D11_VIEWPORT vp;
+	vp.Width = ( FLOAT ) Width;
+	vp.Height = ( FLOAT ) Height;
+	vp.MinDepth = 0.0f;
+	vp.MaxDepth = 1.0f;
+	vp.TopLeftX = 0.0f;
+	vp.TopLeftY = 0.0f;
+	DeviceContext->RSSetViewports( 1u, &vp );
 }
 
 void MXGraphics::EndFrame()

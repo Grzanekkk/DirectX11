@@ -1,6 +1,6 @@
 // Copyright (c) 2024, Made by Jan Puto :>
 
-#include "Bindable/Index/IndexBuffer.h"
+#include "Bindable/Buffer/IndexBuffer.h"
 #include "Exceptions/MXWindowException.h"
 
 BIndexBuffer::BIndexBuffer( MXGraphics& Graphics, std::vector< unsigned short > const& Indices )

@@ -165,8 +165,11 @@
   <ItemGroup>
     <ClCompile Include="Source\Private\App\MXApp.cpp" />
     <ClCompile Include="Source\Private\Bindable\Bindable.cpp" />
-    <ClCompile Include="Source\Private\Bindable\Index\IndexBuffer.cpp" />
-    <ClCompile Include="Source\Private\Bindable\Index\VertexBuffer.cpp" />
+    <ClCompile Include="Source\Private\Bindable\Buffer\Constant\TransformConstantBuffer.cpp" />
+    <ClCompile Include="Source\Private\Bindable\Buffer\IndexBuffer.cpp" />
+    <ClCompile Include="Source\Private\Bindable\Buffer\VertexBuffer.cpp" />
+    <ClCompile Include="Source\Private\Bindable\InputLayout.cpp" />
+    <ClCompile Include="Source\Private\Bindable\Topology.cpp" />
     <ClCompile Include="Source\Private\Drawable\Drawable.cpp" />
     <ClCompile Include="Source\Private\Exceptions\MXException.cpp" />
     <ClCompile Include="Source\Private\Exceptions\MXWindowException.cpp" />
@@ -181,8 +184,11 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="Source\Public\App\MXApp.h" />
     <ClInclude Include="Source\Public\Bindable\Bindable.h" />
-    <ClInclude Include="Source\Public\Bindable\Index\IndexBuffer.h" />
-    <ClInclude Include="Source\Public\Bindable\Index\VertexBuffer.h" />
+    <ClInclude Include="Source\Public\Bindable\Buffer\Constant\TransformConstantBuffer.h" />
+    <ClInclude Include="Source\Public\Bindable\Buffer\IndexBuffer.h" />
+    <ClInclude Include="Source\Public\Bindable\Buffer\VertexBuffer.h" />
+    <ClInclude Include="Source\Public\Bindable\InputLayout.h" />
+    <ClInclude Include="Source\Public\Bindable\Topology.h" />
     <ClInclude Include="Source\Public\Drawable\Drawable.h" />
     <ClInclude Include="Source\Public\Exceptions\MXException.h" />
     <ClInclude Include="Source\Public\Exceptions\MXWindowException.h" />

@@ -52,11 +52,23 @@
     <Filter Include="Source Files\Bindable">
       <UniqueIdentifier>{71dd399b-5c72-4ed2-b47d-b714aeacb941}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Bindable\Index">
+    <Filter Include="Source Files\Bindable\Buffer">
+      <UniqueIdentifier>{fee2a354-35fa-4a71-8032-f38a298dcf83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Bindable\Buffer">
       <UniqueIdentifier>{0bed5073-ae89-42f1-847f-ea580f870353}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Bindable\Index">
-      <UniqueIdentifier>{fee2a354-35fa-4a71-8032-f38a298dcf83}</UniqueIdentifier>
+    <Filter Include="Source Files\Bindable\Shader">
+      <UniqueIdentifier>{b8487167-657d-4806-8548-83bcf6c515bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Bindable\Shader">
+      <UniqueIdentifier>{26f24eab-ffb8-44a5-8d45-8c35200ff2c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Bindable\Buffer\Constant">
+      <UniqueIdentifier>{637d12a9-6a51-408f-bda9-26f2aee0872d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Bindable\Buffer\Constant">
+      <UniqueIdentifier>{9960a7d9-b661-44fd-991b-94eae4ceeb72}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -93,11 +105,20 @@
     <ClCompile Include="Source\Private\Drawable\Drawable.cpp">
       <Filter>Source Files\Drawable</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Private\Bindable\Index\IndexBuffer.cpp">
-      <Filter>Source Files\Bindable\Index</Filter>
+    <ClCompile Include="Source\Private\Bindable\Buffer\IndexBuffer.cpp">
+      <Filter>Source Files\Bindable\Buffer</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Private\Bindable\Index\VertexBuffer.cpp">
-      <Filter>Source Files\Bindable\Index</Filter>
+    <ClCompile Include="Source\Private\Bindable\Buffer\VertexBuffer.cpp">
+      <Filter>Source Files\Bindable\Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Private\Bindable\Buffer\Constant\TransformConstantBuffer.cpp">
+      <Filter>Source Files\Bindable\Buffer\Constant</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Private\Bindable\InputLayout.cpp">
+      <Filter>Source Files\Bindable</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Private\Bindable\Topology.cpp">
+      <Filter>Source Files\Bindable</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -137,11 +158,20 @@
     <ClInclude Include="Source\Public\Bindable\Bindable.h">
       <Filter>Header Files\Bindable</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Public\Bindable\Index\IndexBuffer.h">
-      <Filter>Header Files\Bindable\Index</Filter>
+    <ClInclude Include="Source\Public\Bindable\Buffer\IndexBuffer.h">
+      <Filter>Header Files\Bindable\Buffer</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Public\Bindable\Index\VertexBuffer.h">
-      <Filter>Header Files\Bindable\Index</Filter>
+    <ClInclude Include="Source\Public\Bindable\Buffer\VertexBuffer.h">
+      <Filter>Header Files\Bindable\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Public\Bindable\Buffer\Constant\TransformConstantBuffer.h">
+      <Filter>Header Files\Bindable\Buffer\Constant</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Public\Bindable\InputLayout.h">
+      <Filter>Header Files\Bindable</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Public\Bindable\Topology.h">
+      <Filter>Header Files\Bindable</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

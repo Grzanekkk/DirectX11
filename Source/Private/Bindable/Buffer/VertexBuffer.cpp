@@ -1,6 +1,6 @@
 // Copyright (c) 2024, Made by Jan Puto :>
 
-#include "Bindable/Index/VertexBuffer.h"
+#include "Bindable/Buffer/VertexBuffer.h"
 #include "Exceptions/MXWindowException.h"
 
 void BVertexBuffer::Bind( MXGraphics& Graphics )

@@ -3,7 +3,7 @@
 #include "Drawable/Drawable.h"
 #include "Bindable/Bindable.h"
 #include "Exceptions/MXException.h"
-#include "Bindable/Index/IndexBuffer.h"
+#include "Bindable/Buffer/IndexBuffer.h"
 
 void DDrawable::Draw( MXGraphics& Graphics )
 {
