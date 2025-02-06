@@ -70,6 +70,12 @@
     <Filter Include="Source Files\Bindable\Buffer\Constant">
       <UniqueIdentifier>{9960a7d9-b661-44fd-991b-94eae4ceeb72}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Drawable\Shape">
+      <UniqueIdentifier>{83c6f655-5f7c-487b-a021-b7db57932daf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Drawable\Shape">
+      <UniqueIdentifier>{b27e98c0-af5c-4e39-826a-9efeb8a5d7e7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Private\App\MXApp.cpp">
@@ -119,6 +125,9 @@
     </ClCompile>
     <ClCompile Include="Source\Private\Bindable\Topology.cpp">
       <Filter>Source Files\Bindable</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Private\Drawable\Shape\Box.cpp">
+      <Filter>Source Files\Drawable\Shape</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -172,6 +181,9 @@
     </ClInclude>
     <ClInclude Include="Source\Public\Bindable\Topology.h">
       <Filter>Header Files\Bindable</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Public\Drawable\Shape\Box.h">
+      <Filter>Header Files\Drawable\Shape</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

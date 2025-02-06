@@ -2,6 +2,7 @@
 
 #pragma once
 #include "Bindable/Bindable.h"
+#include "Exceptions/MXWindowException.h"
 
 class BVertexBuffer : public BBindable
 {
@@ -16,13 +17,13 @@ public:
 		VertexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
 		VertexBufferDesc.CPUAccessFlags = 0u;
 		VertexBufferDesc.MiscFlags = 0u;
-		VertexBufferDesc.ByteWidth = sizeof( VertexType ) * Vertices;
+		VertexBufferDesc.ByteWidth = sizeof( VertexType ) * Vertices.size();
 		VertexBufferDesc.StructureByteStride = Stride;
 
 		D3D11_SUBRESOURCE_DATA SubresourceVertexData;
 		SubresourceVertexData.pSysMem = Vertices.data();
 
-		HRESULT const hr = GetDevice()->CreateBuffer( &VertexBufferDesc, &SubresourceVertexData, &VertexBuffer );
+		HRESULT const hr = GetDevice( Graphics )->CreateBuffer( &VertexBufferDesc, &SubresourceVertexData, &VertexBuffer );
 		if( FAILED( hr ) || VertexBuffer.Get() == nullptr )
 		{
 			MXWND_EXCEPTION( hr );

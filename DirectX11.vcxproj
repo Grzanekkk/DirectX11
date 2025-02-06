@@ -171,6 +171,7 @@
     <ClCompile Include="Source\Private\Bindable\InputLayout.cpp" />
     <ClCompile Include="Source\Private\Bindable\Topology.cpp" />
     <ClCompile Include="Source\Private\Drawable\Drawable.cpp" />
+    <ClCompile Include="Source\Private\Drawable\Shape\Box.cpp" />
     <ClCompile Include="Source\Private\Exceptions\MXException.cpp" />
     <ClCompile Include="Source\Private\Exceptions\MXWindowException.cpp" />
     <ClCompile Include="Source\Private\Graphics\MXGraphics.cpp" />
@@ -190,6 +191,7 @@
     <ClInclude Include="Source\Public\Bindable\InputLayout.h" />
     <ClInclude Include="Source\Public\Bindable\Topology.h" />
     <ClInclude Include="Source\Public\Drawable\Drawable.h" />
+    <ClInclude Include="Source\Public\Drawable\Shape\Box.h" />
     <ClInclude Include="Source\Public\Exceptions\MXException.h" />
     <ClInclude Include="Source\Public\Exceptions\MXWindowException.h" />
     <ClInclude Include="Source\Public\Graphics\MXGraphics.h" />
