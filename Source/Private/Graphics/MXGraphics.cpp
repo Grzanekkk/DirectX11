@@ -357,3 +357,8 @@ void MXGraphics::DrawTestTriangle( float const angle, float const X, float const
 	// Draw
 	DeviceContext->DrawIndexed( ( UINT ) std::size( Indices ), 0u, 0u );
 }
+
+void MXGraphics::DrawIndexed( UINT const Count )
+{
+	DeviceContext->DrawIndexed( Count, 0u, 0u );
+}

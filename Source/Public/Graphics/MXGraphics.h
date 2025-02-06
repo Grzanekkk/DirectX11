@@ -10,7 +10,7 @@ namespace wrl = Microsoft::WRL;
 
 class MXGraphics
 {
-	// This will make life easier 
+	// This will make life easier
 	friend class BBindable;
 
 public:
@@ -23,6 +23,7 @@ public:
 	void EndFrame();
 	void ClearBuffer( float const R, float const G, float const B );
 	void DrawTestTriangle( float const angle, float const X, float const Y );
+	void DrawIndexed( UINT const Count );
 
 private:
 	Microsoft::WRL::ComPtr< ID3D11Device > Device = nullptr;

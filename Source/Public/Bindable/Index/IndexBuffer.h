@@ -3,7 +3,7 @@
 #pragma once
 #include "Bindable/Bindable.h"
 
-class BIndexBuffer : BBindable
+class BIndexBuffer : public BBindable
 {
 public:
 	BIndexBuffer( MXGraphics& Graphics, std::vector< unsigned short > const& Indices );

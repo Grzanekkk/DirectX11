@@ -96,6 +96,9 @@
     <ClCompile Include="Source\Private\Bindable\Index\IndexBuffer.cpp">
       <Filter>Source Files\Bindable\Index</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Private\Bindable\Index\VertexBuffer.cpp">
+      <Filter>Source Files\Bindable\Index</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -135,6 +138,9 @@
       <Filter>Header Files\Bindable</Filter>
     </ClInclude>
     <ClInclude Include="Source\Public\Bindable\Index\IndexBuffer.h">
+      <Filter>Header Files\Bindable\Index</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Public\Bindable\Index\VertexBuffer.h">
       <Filter>Header Files\Bindable\Index</Filter>
     </ClInclude>
   </ItemGroup>
