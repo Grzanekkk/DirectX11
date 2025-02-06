@@ -26,7 +26,7 @@ HRESULT MXWindowException::GetErrorCode() const
 	return hr;
 }
 
-std::string MXWindowException::GetErrorMessage() const
+std::string const& MXWindowException::GetErrorMessage() const
 {
 	return TranstaleErrorCode( hr );
 }

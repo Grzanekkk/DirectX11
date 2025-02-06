@@ -2,7 +2,13 @@
 
 #include "Bindable/Bindable.h"
 
-void BBindable::Bind( MXGraphics& Graphics )
+
+ID3D11DeviceContext* const BBindable::GetDeviceContext( MXGraphics& Graphics )
 {
-	// Do stuff
+	return Graphics.DeviceContext.Get();
+}
+
+ID3D11Device* const BBindable::GetDevice( MXGraphics& Graphics )
+{
+	return Graphics.Device.Get();
 }

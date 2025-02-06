@@ -2,13 +2,19 @@
 
 #pragma once
 #include "MXWindowsSetup.h"
+#include <vector>
 #include <d3d11.h>
 #include <wrl.h>
 
+namespace wrl = Microsoft::WRL;
+
 class MXGraphics
 {
+	// This will make life easier 
+	friend class BBindable;
+
 public:
-	MXGraphics( HWND hWnd, float const Height, float const Width );
+	MXGraphics( HWND hWnd, unsigned int const Height, unsigned int const Width );
 	MXGraphics( MXGraphics const& Other ) = delete;
 	MXGraphics& operator=( MXGraphics const& ) = delete;
 	~MXGraphics() = default;
@@ -25,6 +31,6 @@ private:
 	Microsoft::WRL::ComPtr< ID3D11RenderTargetView > RenderTargetView = nullptr;
 	Microsoft::WRL::ComPtr< ID3D11DepthStencilView > DepthStencilView = nullptr;
 
-	float ScreenHeight = 0;
-	float ScreenWidth = 0;
+	unsigned int ScreenHeight = 0;
+	unsigned int ScreenWidth = 0;
 };

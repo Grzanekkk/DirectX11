@@ -11,7 +11,7 @@ public:
 	char const* what() const override;
 	virtual char const* GetType() const override;
 	HRESULT GetErrorCode() const;
-	virtual std::string GetErrorMessage() const override;
+	virtual std::string const& GetErrorMessage() const override;
 	static std::string TranstaleErrorCode( HRESULT const hr );
 
 protected:

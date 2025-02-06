@@ -52,6 +52,12 @@
     <Filter Include="Source Files\Bindable">
       <UniqueIdentifier>{71dd399b-5c72-4ed2-b47d-b714aeacb941}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Bindable\Index">
+      <UniqueIdentifier>{0bed5073-ae89-42f1-847f-ea580f870353}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Bindable\Index">
+      <UniqueIdentifier>{fee2a354-35fa-4a71-8032-f38a298dcf83}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Private\App\MXApp.cpp">
@@ -86,6 +92,9 @@
     </ClCompile>
     <ClCompile Include="Source\Private\Drawable\Drawable.cpp">
       <Filter>Source Files\Drawable</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Private\Bindable\Index\IndexBuffer.cpp">
+      <Filter>Source Files\Bindable\Index</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -124,6 +133,9 @@
     </ClInclude>
     <ClInclude Include="Source\Public\Bindable\Bindable.h">
       <Filter>Header Files\Bindable</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Public\Bindable\Index\IndexBuffer.h">
+      <Filter>Header Files\Bindable\Index</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -11,17 +11,16 @@
 #pragma comment( lib, "d3d11.lib" )
 #pragma comment( lib, "d3dcompiler.lib" )
 
-namespace wrl = Microsoft::WRL;
 namespace dx = DirectX;
 
-MXGraphics::MXGraphics( HWND hWnd, float const Height, float const Width )
+MXGraphics::MXGraphics( HWND hWnd, unsigned int const Height, unsigned int const Width )
 {
 	ScreenHeight = Height;
 	ScreenWidth = Width;
 
 	DXGI_SWAP_CHAIN_DESC SwapChainDescriptor = {};
-	SwapChainDescriptor.BufferDesc.Width = ( UINT ) ScreenWidth;
-	SwapChainDescriptor.BufferDesc.Height = ( UINT ) ScreenHeight;
+	SwapChainDescriptor.BufferDesc.Width = ScreenWidth;
+	SwapChainDescriptor.BufferDesc.Height = ScreenHeight;
 	SwapChainDescriptor.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM; // Maybe use BGRA?
 	SwapChainDescriptor.BufferDesc.RefreshRate.Numerator = 0;			// Use device refresh rate
 	SwapChainDescriptor.BufferDesc.RefreshRate.Denominator = 0;
@@ -85,8 +84,8 @@ MXGraphics::MXGraphics( HWND hWnd, float const Height, float const Width )
 	// Create Depth Texture
 	wrl::ComPtr< ID3D11Texture2D > DepthStencilTexture = nullptr;
 	D3D11_TEXTURE2D_DESC DepthTextureDesc = {};
-	DepthTextureDesc.Height = ( UINT ) ScreenHeight;
-	DepthTextureDesc.Width = ( UINT ) ScreenWidth;
+	DepthTextureDesc.Height = ScreenHeight;
+	DepthTextureDesc.Width = ScreenWidth;
 	DepthTextureDesc.MipLevels = 1u;
 	DepthTextureDesc.ArraySize = 1u;
 	DepthTextureDesc.Format = DXGI_FORMAT_D32_FLOAT;
@@ -182,7 +181,7 @@ void MXGraphics::DrawTestTriangle( float const angle, float const X, float const
 	};
 
 	// Figure this out properly
-	float const AspectRation = ScreenHeight / ScreenWidth;
+	float const AspectRation = ( float ) ScreenHeight / ( float ) ScreenWidth;
 
 	// clang-format off
 	FConstantBufferTransform const ConstantBuffer = {

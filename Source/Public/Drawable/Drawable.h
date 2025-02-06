@@ -12,6 +12,7 @@ class DDrawable
 {
 public:
 	DDrawable() = default;
+	DDrawable( DDrawable const& ) = delete;
 	~DDrawable() = default;
 
 	void Draw( MXGraphics& Graphics );

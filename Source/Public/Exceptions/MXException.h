@@ -15,7 +15,7 @@ public:
 	int GetLine() const;
 	std::string const& GetFile() const;
 	std::string GetOriginString() const;
-	virtual std::string GetErrorMessage() const;
+	virtual std::string const& GetErrorMessage() const;
 
 private:
 	int Line = -1;
