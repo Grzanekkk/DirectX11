@@ -5,8 +5,8 @@
 #include "Exceptions/MXWindowException.h"
 #include "Graphics/MXGraphicsTypes.h"
 #include "d3dcompiler.h"
-#include <cmath>
 #include <DirectXMath.h>
+#include <cmath>
 
 #pragma comment( lib, "d3d11.lib" )
 #pragma comment( lib, "d3dcompiler.lib" )

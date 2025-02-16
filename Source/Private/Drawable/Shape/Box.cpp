@@ -6,6 +6,8 @@
 #include "Bindable/Buffer/IndexBuffer.h"
 #include "Bindable/InputLayout.h"
 #include "Bindable/Topology.h"
+#include "Bindable/Shader/VertexShader.h"
+#include "Bindable/Shader/PixelShader.h"
 
 DBox::DBox( MXGraphics& Graphics )
 {
@@ -48,16 +50,26 @@ DBox::DBox( MXGraphics& Graphics )
 	// #FIXME Bind Pixel Shader
 	// #FIXME Bind Vertex Shader
 
+	std::unique_ptr< BVertexShader > VertexShader = std::make_unique< BVertexShader >( Graphics, L"Shader/Compiled/VertexShader.cso" );
+	if( !VertexShader )
+	{
+		MX_EXCEPTION( "Failed to create Vertex shader in Box!" );
+	}
+
+	ID3DBlob* const VertexShaderBlob = VertexShader->GetBytecode();
+	AddBind( std::move( VertexShader ) );
+
+	AddBind( std::make_unique< BPixelShader >( Graphics, L"Shader/Compiled/PixelShader.cso" ) );
+
 	// clang-format off
 	// Input layout
 	wrl::ComPtr< ID3D11InputLayout > InputLayout = nullptr;
-	D3D11_INPUT_ELEMENT_DESC const InputElementDescription[] = { 
+	std::vector<D3D11_INPUT_ELEMENT_DESC> const InputElementDescription = { 
 		{ "Position", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 }
 	};
 	// clang-format on
 
-	// #FIXME Get vertext shader byte code
-	// AddBind( std::make_unique< BInputLayout >( Graphics, InputElementDescription ) );
+	AddBind( std::make_unique< BInputLayout >( Graphics, InputElementDescription, VertexShaderBlob ) );
 
 	AddBind( std::make_unique< BTopology >( Graphics, D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST ) );
 }

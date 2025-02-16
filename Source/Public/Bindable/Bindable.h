@@ -2,6 +2,7 @@
 
 #pragma once
 #include "Graphics/MXGraphics.h"
+#include <string>
 
 class BBindable
 {

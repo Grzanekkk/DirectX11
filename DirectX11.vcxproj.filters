@@ -129,6 +129,15 @@
     <ClCompile Include="Source\Private\Drawable\Shape\Box.cpp">
       <Filter>Source Files\Drawable\Shape</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Private\Bindable\Shader\PixelShader.cpp">
+      <Filter>Source Files\Bindable\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Private\Bindable\Shader\ShaderBase.cpp">
+      <Filter>Source Files\Bindable\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Private\Bindable\Shader\VertexShader.cpp">
+      <Filter>Source Files\Bindable\Shader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -184,6 +193,15 @@
     </ClInclude>
     <ClInclude Include="Source\Public\Drawable\Shape\Box.h">
       <Filter>Header Files\Drawable\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Public\Bindable\Shader\PixelShader.h">
+      <Filter>Header Files\Bindable\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Public\Bindable\Shader\ShaderBase.h">
+      <Filter>Header Files\Bindable\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Public\Bindable\Shader\VertexShader.h">
+      <Filter>Header Files\Bindable\Shader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

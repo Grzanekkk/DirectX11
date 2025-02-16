@@ -169,6 +169,9 @@
     <ClCompile Include="Source\Private\Bindable\Buffer\IndexBuffer.cpp" />
     <ClCompile Include="Source\Private\Bindable\Buffer\VertexBuffer.cpp" />
     <ClCompile Include="Source\Private\Bindable\InputLayout.cpp" />
+    <ClCompile Include="Source\Private\Bindable\Shader\PixelShader.cpp" />
+    <ClCompile Include="Source\Private\Bindable\Shader\ShaderBase.cpp" />
+    <ClCompile Include="Source\Private\Bindable\Shader\VertexShader.cpp" />
     <ClCompile Include="Source\Private\Bindable\Topology.cpp" />
     <ClCompile Include="Source\Private\Drawable\Drawable.cpp" />
     <ClCompile Include="Source\Private\Drawable\Shape\Box.cpp" />
@@ -189,6 +192,9 @@
     <ClInclude Include="Source\Public\Bindable\Buffer\IndexBuffer.h" />
     <ClInclude Include="Source\Public\Bindable\Buffer\VertexBuffer.h" />
     <ClInclude Include="Source\Public\Bindable\InputLayout.h" />
+    <ClInclude Include="Source\Public\Bindable\Shader\PixelShader.h" />
+    <ClInclude Include="Source\Public\Bindable\Shader\ShaderBase.h" />
+    <ClInclude Include="Source\Public\Bindable\Shader\VertexShader.h" />
     <ClInclude Include="Source\Public\Bindable\Topology.h" />
     <ClInclude Include="Source\Public\Drawable\Drawable.h" />
     <ClInclude Include="Source\Public\Drawable\Shape\Box.h" />
