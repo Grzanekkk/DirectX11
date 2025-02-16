@@ -11,10 +11,10 @@ MXApp::MXApp()
 	: WindowHandle{ WindowWidth, WindowHeight, "TOYOTA" }
 {
 	std::mt19937 rng( std::random_device{}() );
-	std::uniform_real_distribution< float > AngleRand( 0.0f, 3.1415f * 2.0f );
-	std::uniform_real_distribution< float > SpeedRand( 0.0f, 3.1415f * 2.0f );
-	std::uniform_real_distribution< float > OrbitRand( 0.0f, 3.1415f * 0.3f );
-	std::uniform_real_distribution< float > RadiusRand( 6.0f, 20.0f );
+	std::uniform_real_distribution< float > const AngleRand( 0.0f, 3.1415f * 2.0f );
+	std::uniform_real_distribution< float > const SpeedRand( 0.0f, 3.1415f * 2.0f );
+	std::uniform_real_distribution< float > const OrbitRand( 0.0f, 3.1415f * 0.3f );
+	std::uniform_real_distribution< float > const RadiusRand( 6.0f, 20.0f );
 	for( auto i = 0; i < 80; i++ )
 	{
 		Boxes.push_back( std::make_unique< DBox >( WindowHandle.GetGraphics(), rng, AngleRand, SpeedRand, OrbitRand, RadiusRand ) );
@@ -63,7 +63,7 @@ void MXApp::Tick()
 	//WindowHandle.GetGraphics().EndFrame();
 
 	// #FIXME get real delta time
-	float DeltaTime = 0.016;
+	float const DeltaTime = 0.01;
 	WindowHandle.GetGraphics().ClearBuffer( 0.07f, 0.0f, 0.12f );
 	for( auto& Box : Boxes )
 	{
