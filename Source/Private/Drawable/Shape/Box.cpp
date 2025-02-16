@@ -5,12 +5,24 @@
 #include "Bindable/Buffer/VertexBuffer.h"
 #include "Bindable/Buffer/IndexBuffer.h"
 #include "Bindable/Buffer/Constant/ConstantBuffer.h"
+#include "Bindable/Buffer/Constant/TransformConstantBuffer.h"
 #include "Bindable/InputLayout.h"
 #include "Bindable/Topology.h"
 #include "Bindable/Shader/VertexShader.h"
 #include "Bindable/Shader/PixelShader.h"
 
-DBox::DBox( MXGraphics& Graphics )
+DBox::DBox( MXGraphics& Graphics, std::mt19937& Rng, std::uniform_real_distribution< float >& AngleRand, std::uniform_real_distribution< float >& SpeedRand,
+	std::uniform_real_distribution< float >& OrbitRand, std::uniform_real_distribution< float >& RadiusRand )
+	: r( RadiusRand( Rng ) )
+	, DeltaRoll( SpeedRand( Rng ) )
+	, DeltaPitch( SpeedRand( Rng ) )
+	, DeltaYaw( SpeedRand( Rng ) )
+	, DeltaPhi( OrbitRand( Rng ) )
+	, DeltaTheta( OrbitRand( Rng ) )
+	, DeltaChi( OrbitRand( Rng ) )
+	, Chi( AngleRand( Rng ) )
+	, Theta( AngleRand( Rng ) )
+	, Phi( AngleRand( Rng ) )
 {
 	// clang-format off
 	std::vector< FVertex > Vertices = { 
@@ -26,13 +38,16 @@ DBox::DBox( MXGraphics& Graphics )
 
 	AddBind( std::make_unique< BVertexBuffer >( Graphics, Vertices ) );
 
-	// Constant buffer for matrix transformation
-	// struct FConstantBufferTransform
-	//{
-	//	dx::XMMATRIX transform;
-	//};
+	std::unique_ptr< BVertexShader > VertexShader = std::make_unique< BVertexShader >( Graphics, L"Shader/Compiled/VertexShader.cso" );
+	if( !VertexShader )
+	{
+		MX_EXCEPTION( "Failed to create Vertex shader in Box!" );
+	}
 
-	// #FIXME Bind Transform and Color ConstantBuffer
+	ID3DBlob* const VertexShaderBlob = VertexShader->GetBytecode();
+	AddBind( std::move( VertexShader ) );
+
+	AddBind( std::make_unique< BPixelShader >( Graphics, L"Shader/Compiled/PixelShader.cso" ) );
 
 	// clang-format off
 	// Index buffer
@@ -46,7 +61,7 @@ DBox::DBox( MXGraphics& Graphics )
 	};
 	// clang-format on
 
-	AddBind( std::make_unique< BIndexBuffer >( Graphics, Indices ) );
+	AddIndexBuffer( std::make_unique< BIndexBuffer >( Graphics, Indices ) );
 
 	// Face color buffer
 	struct FConstantBufferFaceColor
@@ -72,20 +87,7 @@ DBox::DBox( MXGraphics& Graphics )
 
 	AddBind( std::make_unique< BPixelConstantBuffer< FConstantBufferFaceColor > >( Graphics, ConstantBufferFaceColor ) );
 
-	std::unique_ptr< BVertexShader > VertexShader = std::make_unique< BVertexShader >( Graphics, L"Shader/Compiled/VertexShader.cso" );
-	if( !VertexShader )
-	{
-		MX_EXCEPTION( "Failed to create Vertex shader in Box!" );
-	}
-
-	ID3DBlob* const VertexShaderBlob = VertexShader->GetBytecode();
-	AddBind( std::move( VertexShader ) );
-
-	AddBind( std::make_unique< BPixelShader >( Graphics, L"Shader/Compiled/PixelShader.cso" ) );
-
 	// clang-format off
-	// Input layout
-	wrl::ComPtr< ID3D11InputLayout > InputLayout = nullptr;
 	std::vector<D3D11_INPUT_ELEMENT_DESC> const InputElementDescription = { 
 		{ "Position", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 }
 	};
@@ -94,8 +96,24 @@ DBox::DBox( MXGraphics& Graphics )
 	AddBind( std::make_unique< BInputLayout >( Graphics, InputElementDescription, VertexShaderBlob ) );
 
 	AddBind( std::make_unique< BTopology >( Graphics, D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST ) );
+
+	AddBind( std::make_unique< BTransformConstantBuffer >( Graphics, *this ) );
 }
 
 void DBox::Tick( float const DeltaTime )
 {
+	Roll += DeltaRoll * DeltaTime;
+	Pitch += DeltaPitch * DeltaTime;
+	Yaw += DeltaYaw * DeltaTime;
+	Theta += DeltaTheta * DeltaTime;
+	Phi += DeltaPhi * DeltaTime;
+	Chi += DeltaChi * DeltaTime;
+}
+
+DirectX::XMMATRIX DBox::GetTransformMatrix() const
+{
+	return DirectX::XMMatrixRotationRollPitchYaw( Pitch, Yaw, Roll ) // Local rotation
+		* DirectX::XMMatrixTranslation( r, 0.0f, 0.0f ) // Radius from center of the world
+		* DirectX::XMMatrixRotationRollPitchYaw( Theta, Phi, Chi ) // Orbital rotation around the center of the world
+		* DirectX::XMMatrixTranslation( 0.0f, 0.0f, 20.0f ); 
 }

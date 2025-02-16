@@ -2,6 +2,9 @@
 
 #pragma once
 #include "Bindable/Bindable.h"
+#include "Bindable/Buffer/Constant/ConstantBuffer.h"
+#include <DirectXMath.h>
+
 class DDrawable;
 
 class BTransformConstantBuffer : public BBindable
@@ -12,4 +15,5 @@ public:
 
 private:
 	DDrawable const& Parent;
+	BVertexConstantBuffer< DirectX::XMMATRIX > TransformBuffer;
 };

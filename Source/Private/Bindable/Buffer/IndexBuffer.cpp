@@ -4,14 +4,14 @@
 #include "Exceptions/MXWindowException.h"
 
 BIndexBuffer::BIndexBuffer( MXGraphics& Graphics, std::vector< unsigned short > const& Indices )
-	: IndexCount{ Indices.size() }
+	: IndexCount{ UINT( Indices.size() ) }
 {
 	D3D11_BUFFER_DESC IndexBufferDesc;
 	IndexBufferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
 	IndexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
 	IndexBufferDesc.CPUAccessFlags = 0u;
 	IndexBufferDesc.MiscFlags = 0u;
-	IndexBufferDesc.ByteWidth = sizeof( Indices );
+	IndexBufferDesc.ByteWidth = IndexCount * sizeof( Indices );
 	IndexBufferDesc.StructureByteStride = sizeof( unsigned short );
 
 	D3D11_SUBRESOURCE_DATA SubresourceIndexData;

@@ -7,7 +7,7 @@
 
 void DDrawable::Draw( MXGraphics& Graphics )
 {
-	for( std::unique_ptr< BBindable >& Bindable : Binds )
+	for( auto& Bindable : Binds )
 	{
 		if( Bindable )
 		{
@@ -15,11 +15,19 @@ void DDrawable::Draw( MXGraphics& Graphics )
 		}
 		else
 		{
-			// MX_EXCEPTION( "Invalid Bindable found!" );
+			MX_EXCEPTION( "Invalid Bindable found!" );
 		}
 	}
 
 	// Draw call
+	if( IndexBuffer )
+	{
+		Graphics.DrawIndexed( IndexBuffer->GetCount() );
+	}
+	else
+	{
+		MX_EXCEPTION( "Failed to issue a Draw Call! Valid index buffer is required." );
+	}
 }
 
 void DDrawable::AddBind( std::unique_ptr< BBindable > Bind )

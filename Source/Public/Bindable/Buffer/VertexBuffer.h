@@ -11,7 +11,6 @@ public:
 	BVertexBuffer( MXGraphics& Graphics, std::vector< VertexType > const& Vertices )
 		: Stride( sizeof( VertexType ) )
 	{
-		wrl::ComPtr< ID3D11Buffer > VertexBuffer = nullptr;
 		D3D11_BUFFER_DESC VertexBufferDesc;
 		VertexBufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 		VertexBufferDesc.Usage = D3D11_USAGE_DEFAULT;

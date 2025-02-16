@@ -2,11 +2,11 @@
 
 #pragma once
 #include "Graphics/MXGraphics.h"
+#include "Bindable/Bindable.h"
 #include <DirectXMath.h>
 #include <vector>
 #include <memory>
 
-class BBindable;
 class BIndexBuffer;
 
 class DDrawable
@@ -20,6 +20,7 @@ public:
 	virtual void Tick( float const DeltaTime ) = 0;
 	void AddBind( std::unique_ptr< BBindable > Bind );
 	void AddIndexBuffer( std::unique_ptr< BIndexBuffer > InIndexBuffer );
+	virtual DirectX::XMMATRIX GetTransformMatrix() const = 0;
 
 private:
 	std::vector< std::unique_ptr< BBindable > > Binds;

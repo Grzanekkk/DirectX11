@@ -5,6 +5,7 @@
 #include <vector>
 #include <d3d11.h>
 #include <wrl.h>
+#include <DirectXMath.h>
 
 namespace wrl = Microsoft::WRL;
 
@@ -24,6 +25,8 @@ public:
 	void ClearBuffer( float const R, float const G, float const B );
 	void DrawTestTriangle( float const angle, float const X, float const Y );
 	void DrawIndexed( UINT const Count );
+	void SetProjection( DirectX::FXMMATRIX const& NewProjection );
+	DirectX::XMMATRIX const& GetProjection() const;
 
 private:
 	Microsoft::WRL::ComPtr< ID3D11Device > Device = nullptr;
@@ -34,4 +37,6 @@ private:
 
 	unsigned int ScreenHeight = 0;
 	unsigned int ScreenWidth = 0;
+
+	DirectX::XMMATRIX Projection;
 };

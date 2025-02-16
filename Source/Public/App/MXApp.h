@@ -3,6 +3,7 @@
 
 #include "MXWindow.h"
 #include "Graphics/MXGraphicsTypes.h"
+#include "Drawable/Shape/Box.h"
 
 class MXApp
 {
@@ -21,4 +22,6 @@ private:
 	FColor BackGroudColor = FColor( 0.f, 0.f, 1.f );
 	float CurrentRotation = 0.f;
 	float RotationSpeed = 0.01;
+
+	std::vector< std::unique_ptr< DBox > > Boxes;
 };

@@ -372,3 +372,13 @@ void MXGraphics::DrawIndexed( UINT const Count )
 {
 	DeviceContext->DrawIndexed( Count, 0u, 0u );
 }
+
+void MXGraphics::SetProjection( DirectX::FXMMATRIX const& NewProjection )
+{
+	Projection = NewProjection;
+}
+
+DirectX::XMMATRIX const& MXGraphics::GetProjection() const
+{
+	return Projection;
+}

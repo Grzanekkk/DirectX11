@@ -2,6 +2,7 @@
 
 #pragma once
 #include "Bindable/Bindable.h"
+#include "Exceptions/MXWindowException.h"
 
 template< typename ConstType >
 class BConstantBuffer : public BBindable
@@ -19,6 +20,24 @@ public:
 		D3D11_SUBRESOURCE_DATA SubresourceData = {};
 		SubresourceData.pSysMem = &Data;
 		HRESULT const hr = GetDevice( Graphics )->CreateBuffer( &Descriptor, &SubresourceData, &ConstantBuffer );
+		if( FAILED( hr ) )
+		{
+			MXWND_EXCEPTION( hr );
+		}
+	}
+
+	BConstantBuffer( MXGraphics& Graphics )
+	{
+
+		D3D11_BUFFER_DESC Descriptor;
+		Descriptor.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+		Descriptor.Usage = D3D11_USAGE_DYNAMIC;
+		Descriptor.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+		Descriptor.MiscFlags = 0u;
+		Descriptor.ByteWidth = sizeof( ConstType );
+		Descriptor.StructureByteStride = 0u;
+
+		HRESULT const hr = GetDevice( Graphics )->CreateBuffer( &Descriptor, nullptr, &ConstantBuffer );
 		if( FAILED( hr ) )
 		{
 			MXWND_EXCEPTION( hr );
