@@ -188,6 +188,7 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="Source\Public\App\MXApp.h" />
     <ClInclude Include="Source\Public\Bindable\Bindable.h" />
+    <ClInclude Include="Source\Public\Bindable\Buffer\Constant\ConstantBuffer.h" />
     <ClInclude Include="Source\Public\Bindable\Buffer\Constant\TransformConstantBuffer.h" />
     <ClInclude Include="Source\Public\Bindable\Buffer\IndexBuffer.h" />
     <ClInclude Include="Source\Public\Bindable\Buffer\VertexBuffer.h" />

@@ -4,6 +4,7 @@
 #include "Graphics/MXGraphicsTypes.h"
 #include "Bindable/Buffer/VertexBuffer.h"
 #include "Bindable/Buffer/IndexBuffer.h"
+#include "Bindable/Buffer/Constant/ConstantBuffer.h"
 #include "Bindable/InputLayout.h"
 #include "Bindable/Topology.h"
 #include "Bindable/Shader/VertexShader.h"
@@ -47,8 +48,29 @@ DBox::DBox( MXGraphics& Graphics )
 
 	AddBind( std::make_unique< BIndexBuffer >( Graphics, Indices ) );
 
-	// #FIXME Bind Pixel Shader
-	// #FIXME Bind Vertex Shader
+	// Face color buffer
+	struct FConstantBufferFaceColor
+	{
+		struct
+		{
+			float R;
+			float G;
+			float B;
+			float A;
+
+		} FaceColor[ 6 ];
+	};
+
+	FConstantBufferFaceColor ConstantBufferFaceColor = { {
+		{ 0.9, 0.7, 0.8 },
+		{ 0.7, 0.9, 0.7 },
+		{ 0.7, 0.8, 1.0 },
+		{ 1.0, 0.9, 0.7 },
+		{ 0.8, 0.7, 1.0 },
+		{ 0.9, 1.0, 0.7 },
+	} };
+
+	AddBind( std::make_unique< BPixelConstantBuffer< FConstantBufferFaceColor > >( Graphics, ConstantBufferFaceColor ) );
 
 	std::unique_ptr< BVertexShader > VertexShader = std::make_unique< BVertexShader >( Graphics, L"Shader/Compiled/VertexShader.cso" );
 	if( !VertexShader )

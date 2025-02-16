@@ -203,6 +203,9 @@
     <ClInclude Include="Source\Public\Bindable\Shader\VertexShader.h">
       <Filter>Header Files\Bindable\Shader</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Public\Bindable\Buffer\Constant\ConstantBuffer.h">
+      <Filter>Header Files\Bindable\Buffer\Constant</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DirectX11.rc">
