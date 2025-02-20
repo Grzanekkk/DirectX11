@@ -15,7 +15,7 @@ MXApp::MXApp()
 	std::uniform_real_distribution< float > SpeedRand( 0.0f, 3.1415f * 2.0f );
 	std::uniform_real_distribution< float > OrbitRand( 0.0f, 3.1415f * 0.3f );
 	std::uniform_real_distribution< float > RadiusRand( 6.0f, 20.0f );
-	for( auto i = 0; i < 80; i++ )
+	for( auto i = 0; i < 100; i++ )
 	{
 		Boxes.push_back( std::make_unique< DBox >( WindowHandle.GetGraphics(), rng, AngleRand, SpeedRand, OrbitRand, RadiusRand ) );
 	}

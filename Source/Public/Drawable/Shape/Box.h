@@ -1,10 +1,10 @@
 // Copyright (c) 2024, Made by Jan Puto :>
 
 #pragma once
-#include "Drawable/Drawable.h"
-#include <random> 
+#include "Drawable/DrawableStaticBase.h"
+#include <random>
 
-class DBox : public DDrawable
+class DBox : public DDrawableStaticBase< DBox >
 {
 public:
 	DBox( MXGraphics& Graphics, std::mt19937& Rng, std::uniform_real_distribution< float >& AngleRand, std::uniform_real_distribution< float >& SpeedRand,

@@ -22,9 +22,13 @@ public:
 	void AddIndexBuffer( std::unique_ptr< BIndexBuffer > InIndexBuffer );
 	virtual DirectX::XMMATRIX GetTransformMatrix() const = 0;
 
-private:
-	std::vector< std::unique_ptr< BBindable > > Binds;
+protected:
+	virtual std::vector< std::unique_ptr< BBindable > > const& GetStaticBinds() const = 0;
 
+protected:
 	// Unique ptr of this is held in Binds, this is just for quick access
 	BIndexBuffer const* IndexBuffer = nullptr;
+
+private:
+	std::vector< std::unique_ptr< BBindable > > Binds;
 };

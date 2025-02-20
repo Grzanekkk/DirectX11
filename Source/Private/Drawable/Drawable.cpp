@@ -19,6 +19,18 @@ void DDrawable::Draw( MXGraphics& Graphics )
 		}
 	}
 
+	for( auto& Bindable : GetStaticBinds() )
+	{
+		if( Bindable )
+		{
+			Bindable->Bind( Graphics );
+		}
+		else
+		{
+			MX_EXCEPTION( "Invalid Static Bindable found!" );
+		}
+	}
+
 	// Draw call
 	if( IndexBuffer )
 	{
@@ -34,7 +46,7 @@ void DDrawable::AddBind( std::unique_ptr< BBindable > Bind )
 {
 	if( Bind )
 	{
-		assert( "Must use AddIndexBuffer to bind index buffer" && typeid( *bind ) != typeid( IndexBuffer ) );
+		assert( "Must use AddIndexBuffer to bind index buffer" && typeid( *bind ) != typeid( BIndexBuffer ) );
 
 		Binds.push_back( std::move( Bind ) );
 	}
@@ -42,8 +54,11 @@ void DDrawable::AddBind( std::unique_ptr< BBindable > Bind )
 
 void DDrawable::AddIndexBuffer( std::unique_ptr< BIndexBuffer > InIndexBuffer )
 {
-	assert( "Index buffer is already added" && IndexBuffer == nullptr );
+	if( InIndexBuffer )
+	{
+		assert( "Index buffer is already added" && IndexBuffer == nullptr );
 
-	IndexBuffer = InIndexBuffer.get();
-	Binds.push_back( std::move( InIndexBuffer ) );
+		IndexBuffer = InIndexBuffer.get();
+		Binds.push_back( std::move( InIndexBuffer ) );
+	}
 }

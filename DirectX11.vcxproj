@@ -174,6 +174,7 @@
     <ClCompile Include="Source\Private\Bindable\Shader\VertexShader.cpp" />
     <ClCompile Include="Source\Private\Bindable\Topology.cpp" />
     <ClCompile Include="Source\Private\Drawable\Drawable.cpp" />
+    <ClCompile Include="Source\Private\Drawable\DrawableStaticBase.cpp" />
     <ClCompile Include="Source\Private\Drawable\Shape\Box.cpp" />
     <ClCompile Include="Source\Private\Exceptions\MXException.cpp" />
     <ClCompile Include="Source\Private\Exceptions\MXWindowException.cpp" />
@@ -198,6 +199,7 @@
     <ClInclude Include="Source\Public\Bindable\Shader\VertexShader.h" />
     <ClInclude Include="Source\Public\Bindable\Topology.h" />
     <ClInclude Include="Source\Public\Drawable\Drawable.h" />
+    <ClInclude Include="Source\Public\Drawable\DrawableStaticBase.h" />
     <ClInclude Include="Source\Public\Drawable\Shape\Box.h" />
     <ClInclude Include="Source\Public\Exceptions\MXException.h" />
     <ClInclude Include="Source\Public\Exceptions\MXWindowException.h" />
