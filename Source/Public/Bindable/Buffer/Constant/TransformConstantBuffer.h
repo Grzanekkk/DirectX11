@@ -4,6 +4,7 @@
 #include "Bindable/Bindable.h"
 #include "Bindable/Buffer/Constant/ConstantBuffer.h"
 #include <DirectXMath.h>
+#include <memory>
 
 class DDrawable;
 
@@ -15,5 +16,5 @@ public:
 
 private:
 	DDrawable const& Parent;
-	BVertexConstantBuffer< DirectX::XMMATRIX > TransformBuffer;
+	static std::unique_ptr< BVertexConstantBuffer< DirectX::XMMATRIX > > TransformConstantBuffer;
 };

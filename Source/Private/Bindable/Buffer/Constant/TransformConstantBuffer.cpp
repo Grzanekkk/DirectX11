@@ -6,12 +6,20 @@
 
 BTransformConstantBuffer::BTransformConstantBuffer( MXGraphics& Graphics, DDrawable const& InParent )
 	: Parent{ InParent }
-	, TransformBuffer{ Graphics }
 {
+	if( !TransformConstantBuffer )
+	{
+		TransformConstantBuffer = std::make_unique< BVertexConstantBuffer< DirectX::XMMATRIX > >( Graphics );
+	}
 }
 
 void BTransformConstantBuffer::Bind( MXGraphics& Graphics )
 {
-	TransformBuffer.Update( Graphics, DirectX::XMMatrixTranspose( Parent.GetTransformMatrix() * Graphics.GetProjection() ) );
-	TransformBuffer.Bind( Graphics );
+	if( TransformConstantBuffer )
+	{
+		TransformConstantBuffer->Update( Graphics, DirectX::XMMatrixTranspose( Parent.GetTransformMatrix() * Graphics.GetProjection() ) );
+		TransformConstantBuffer->Bind( Graphics );
+	}
 }
+
+std::unique_ptr< BVertexConstantBuffer< DirectX::XMMATRIX > > BTransformConstantBuffer::TransformConstantBuffer;
