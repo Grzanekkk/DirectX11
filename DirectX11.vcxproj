@@ -176,6 +176,7 @@
     <ClCompile Include="Source\Private\Drawable\Drawable.cpp" />
     <ClCompile Include="Source\Private\Drawable\DrawableStaticBase.cpp" />
     <ClCompile Include="Source\Private\Drawable\Shape\Box.cpp" />
+    <ClCompile Include="Source\Private\Drawable\Shape\Pyramid.cpp" />
     <ClCompile Include="Source\Private\Exceptions\MXException.cpp" />
     <ClCompile Include="Source\Private\Exceptions\MXWindowException.cpp" />
     <ClCompile Include="Source\Private\Graphics\MXGraphics.cpp" />
@@ -201,6 +202,7 @@
     <ClInclude Include="Source\Public\Drawable\Drawable.h" />
     <ClInclude Include="Source\Public\Drawable\DrawableStaticBase.h" />
     <ClInclude Include="Source\Public\Drawable\Shape\Box.h" />
+    <ClInclude Include="Source\Public\Drawable\Shape\Pyramid.h" />
     <ClInclude Include="Source\Public\Exceptions\MXException.h" />
     <ClInclude Include="Source\Public\Exceptions\MXWindowException.h" />
     <ClInclude Include="Source\Public\Graphics\MXGraphics.h" />

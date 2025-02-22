@@ -4,6 +4,7 @@
 #include "MXWindow.h"
 #include "Graphics/MXGraphicsTypes.h"
 #include "Drawable/Shape/Box.h"
+#include "Drawable/Shape/Pyramid.h"
 
 class MXApp
 {
@@ -23,5 +24,7 @@ private:
 	float CurrentRotation = 0.f;
 	float RotationSpeed = 0.01;
 
+	// #FIXME add parent class
 	std::vector< std::unique_ptr< DBox > > Boxes;
+	std::vector< std::unique_ptr< DPyramid > > Pyramids;
 };
