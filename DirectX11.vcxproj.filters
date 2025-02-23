@@ -76,6 +76,12 @@
     <Filter Include="Source Files\Drawable\Shape">
       <UniqueIdentifier>{b27e98c0-af5c-4e39-826a-9efeb8a5d7e7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Clock">
+      <UniqueIdentifier>{eea2cfdc-d8bb-44d6-a015-2d7445398bea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Clock">
+      <UniqueIdentifier>{6c5a82de-d76f-4637-bb66-da255080e6b7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Private\App\MXApp.cpp">
@@ -143,6 +149,9 @@
     </ClCompile>
     <ClCompile Include="Source\Private\Drawable\Shape\Pyramid.cpp">
       <Filter>Source Files\Drawable\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Private\Clock\Clock.cpp">
+      <Filter>Source Files\Clock</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -217,6 +226,9 @@
     </ClInclude>
     <ClInclude Include="Source\Public\Drawable\Shape\Pyramid.h">
       <Filter>Header Files\Drawable\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Public\Clock\Clock.h">
+      <Filter>Header Files\Clock</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

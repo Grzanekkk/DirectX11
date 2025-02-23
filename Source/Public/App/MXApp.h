@@ -5,6 +5,7 @@
 #include "Graphics/MXGraphicsTypes.h"
 #include "Drawable/Shape/Box.h"
 #include "Drawable/Shape/Pyramid.h"
+#include "Clock/Clock.h"
 
 class MXApp
 {
@@ -13,7 +14,7 @@ public:
 
 public:
 	int StartApp();
-	void Tick();
+	void Tick( float const DeltaTime );
 
 private:
 	int WindowHeight = 900;
@@ -27,4 +28,5 @@ private:
 	// #FIXME add parent class
 	std::vector< std::unique_ptr< DBox > > Boxes;
 	std::vector< std::unique_ptr< DPyramid > > Pyramids;
+	MXClock Clock;
 };

@@ -173,6 +173,7 @@
     <ClCompile Include="Source\Private\Bindable\Shader\ShaderBase.cpp" />
     <ClCompile Include="Source\Private\Bindable\Shader\VertexShader.cpp" />
     <ClCompile Include="Source\Private\Bindable\Topology.cpp" />
+    <ClCompile Include="Source\Private\Clock\Clock.cpp" />
     <ClCompile Include="Source\Private\Drawable\Drawable.cpp" />
     <ClCompile Include="Source\Private\Drawable\DrawableStaticBase.cpp" />
     <ClCompile Include="Source\Private\Drawable\Shape\Box.cpp" />
@@ -199,6 +200,7 @@
     <ClInclude Include="Source\Public\Bindable\Shader\ShaderBase.h" />
     <ClInclude Include="Source\Public\Bindable\Shader\VertexShader.h" />
     <ClInclude Include="Source\Public\Bindable\Topology.h" />
+    <ClInclude Include="Source\Public\Clock\Clock.h" />
     <ClInclude Include="Source\Public\Drawable\Drawable.h" />
     <ClInclude Include="Source\Public\Drawable\DrawableStaticBase.h" />
     <ClInclude Include="Source\Public\Drawable\Shape\Box.h" />

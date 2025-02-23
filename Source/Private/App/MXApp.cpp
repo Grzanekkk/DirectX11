@@ -15,17 +15,20 @@ MXApp::MXApp()
 	std::uniform_real_distribution< float > SpeedRand( 0.0f, 3.1415f * 2.0f );
 	std::uniform_real_distribution< float > OrbitRand( 0.0f, 3.1415f * 0.3f );
 	std::uniform_real_distribution< float > RadiusRand( 6.0f, 20.0f );
-	for( auto i = 0; i < 100; i++ )
+	for( auto i = 0; i < 60; i++ )
 	{
 		Boxes.push_back( std::make_unique< DBox >( WindowHandle.GetGraphics(), rng, AngleRand, SpeedRand, OrbitRand, RadiusRand ) );
 		Pyramids.push_back( std::make_unique< DPyramid >( WindowHandle.GetGraphics(), rng, AngleRand, SpeedRand, OrbitRand, RadiusRand ) );
 	}
 
 	WindowHandle.GetGraphics().SetProjection( DirectX::XMMatrixPerspectiveLH( 1.0f, 3.0f / 4.0f, 0.5f, 40.0f ) );
+	Clock = MXClock();
 }
 
 int MXApp::StartApp()
 {
+	Clock.StartClock();
+
 	while( true )
 	{
 		if( std::optional< int > const EscapeCode = WindowHandle.ProcessMessages() )
@@ -33,11 +36,14 @@ int MXApp::StartApp()
 			return EscapeCode.value();
 		}
 
-		Tick();
+		float const DeltaTime = Clock.GetDeltaTime();
+		Clock.Tick();
+
+		Tick( DeltaTime );
 	}
 }
 
-void MXApp::Tick()
+void MXApp::Tick( float const DeltaTime )
 {
 	// TempTickCounter++;
 	// if( TempTickCounter > 30 )
@@ -63,15 +69,17 @@ void MXApp::Tick()
 	// WindowHandle.GetGraphics().DrawTestTriangle( -CurrentRotation + 66.f, 0.f, 0.f );
 	// WindowHandle.GetGraphics().EndFrame();
 
-	// #FIXME get real delta time
-	float const DeltaTime = 0.01;
+	std::stringstream ss;
+	float const Fps = 1.0f / DeltaTime;
+	ss << "DeltaTime: " << DeltaTime << " FPS: " << Fps;
+	WindowHandle.SetTitle( ss.str().c_str() );
 	WindowHandle.GetGraphics().ClearBuffer( 0.07f, 0.0f, 0.12f );
 
-	//for( auto& Box : Boxes )
-	//{
-	//	Box->Tick( DeltaTime );
-	//	Box->Draw( WindowHandle.GetGraphics() );
-	//}
+	for( auto& Box : Boxes )
+	{
+		Box->Tick( DeltaTime );
+		Box->Draw( WindowHandle.GetGraphics() );
+	}
 
 	for( auto& Pyramid : Pyramids )
 	{
