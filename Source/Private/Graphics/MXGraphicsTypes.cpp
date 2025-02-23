@@ -3,9 +3,7 @@
 #include "Graphics/MXGraphicsTypes.h"
 
 FVertex::FVertex( float const X, float const Y, float const Z )
-	: X{ X }
-	, Y{ Y }
-	, Z{ Z }
+	: Position{ X, Y, Z }
 {
 }
 

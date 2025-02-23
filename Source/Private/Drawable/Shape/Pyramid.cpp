@@ -85,11 +85,11 @@ DPyramid::DPyramid( MXGraphics& Graphics, std::mt19937& Rng, std::uniform_real_d
 				float B;
 				float A;
 
-			} FaceColor[ 10 ];
+			} FaceColor[ 6 ];
 		};
 
 		FConstantBufferFaceColor ConstantBufferFaceColor = { { { 0.95f, 0.75f, 0.85f }, { 0.75f, 0.95f, 0.75f }, { 0.65f, 0.85f, 1.0f }, { 1.0f, 0.85f, 0.65f },
-			{ 0.85f, 0.65f, 1.0f }, { 0.78f, 0.88f, 0.95f }, { 0.92f, 0.72f, 0.85f }, { 0.72f, 0.92f, 0.78f }, { 0.85f, 0.95f, 0.65f }, { 0.65f, 0.78f, 0.95f } } };
+			{ 0.85f, 0.65f, 1.0f }, { 0.78f, 0.88f, 0.95f } } };
 
 		AddStaticBind( std::make_unique< BPixelConstantBuffer< FConstantBufferFaceColor > >( Graphics, ConstantBufferFaceColor ) );
 

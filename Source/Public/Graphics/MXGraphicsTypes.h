@@ -2,6 +2,8 @@
 
 #pragma once
 
+#include "DirectXMath.h"
+
 struct FColor
 {
 public:
@@ -26,7 +28,5 @@ struct FVertex
 {
 public:
 	FVertex( float const X, float const Y, float const Z );
-	float X;
-	float Y;
-	float Z;
+	DirectX::XMFLOAT3 Position;
 };
